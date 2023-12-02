@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TaskBuddy.Models;
 
 namespace TaskBuddy.Data
 {
@@ -9,5 +10,8 @@ namespace TaskBuddy.Data
             : base(options)
         {
         }
+
+        public DbSet<Message> Message {  get; set; }
+        public DbSet<Chat> Chat { get; set; }
     }
 }
