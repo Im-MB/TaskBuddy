@@ -14,5 +14,6 @@ namespace TaskBuddy.Data
         public DbSet<Message> Message {  get; set; }
         public DbSet<Chat> Chat { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Tache> Tasks { get; set; }
     }
 }
