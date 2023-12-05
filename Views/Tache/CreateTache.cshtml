@@ -1,0 +1,54 @@
+﻿@model TaskBuddy.Models.Tache
+
+@{
+    ViewData["Title"] = "CreateTache";
+}
+
+<h1>CreateTache</h1>
+
+<h4>What is you Task for today?</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateTache">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nom" class="control-label">Title</label>
+                <input asp-for="Nom" class="form-control" />
+                <span asp-validation-for="Nom" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden >
+                <label asp-for="Etat" class="control-label">Status</label>
+                <input asp-for="Etat" class="form-control" value="test"/>
+                <span asp-validation-for="Etat" class="text-danger" ></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="DateD" class="control-label"></label>
+                <input asp-for="DateD" class="form-control"  disabled value="test"/>
+                <span asp-validation-for="DateD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Note" class="control-label">Note</label>
+                <textarea type="text" asp-for="Note" class="form-control" ></textarea>
+                <span asp-validation-for="DateF" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateF" class="control-label">End Date</label>
+                <input asp-for="DateF" class="form-control" />
+                <span asp-validation-for="DateF" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-light" asp-action="ListeTaches">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

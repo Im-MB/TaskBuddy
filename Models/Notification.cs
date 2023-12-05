@@ -7,6 +7,6 @@ namespace TaskBuddy.Models
         [Key]
         public int Id { get; set; }
 
-        public string Contenu { get; set; }
+        public string? Contenu { get; set; }
     }
 }
