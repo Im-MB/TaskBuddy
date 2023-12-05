@@ -315,23 +315,6 @@ namespace TaskBuddy.Data.Migrations
                     b.ToTable("Tasks");
                 });
 
-            modelBuilder.Entity("TaskBuddy.Models.Notification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Contenu")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Notifications");
-                });
-
             modelBuilder.Entity("TaskBuddy.Models.Utilisateur", b =>
                 {
                     b.Property<int>("IdUtilisateur")

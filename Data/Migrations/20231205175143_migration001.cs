@@ -6,23 +6,18 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TaskBuddy.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class migration1 : Migration
+    public partial class migration001 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Notifications",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Contenu = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Notifications", x => x.Id);
-                });
+            migrationBuilder.AlterColumn<string>(
+                name: "Contenu",
+                table: "Notifications",
+                type: "nvarchar(max)",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
 
             migrationBuilder.CreateTable(
                 name: "Tasks",
@@ -46,10 +41,17 @@ namespace TaskBuddy.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Notifications");
-
-            migrationBuilder.DropTable(
                 name: "Tasks");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Contenu",
+                table: "Notifications",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)",
+                oldNullable: true);
         }
     }
 }
