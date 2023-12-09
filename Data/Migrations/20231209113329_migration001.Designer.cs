@@ -12,7 +12,7 @@ using TaskBuddy.Data;
 namespace TaskBuddy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231205175143_migration001")]
+    [Migration("20231209113329_migration001")]
     partial class migration001
     {
         /// <inheritdoc />
@@ -243,7 +243,7 @@ namespace TaskBuddy.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Chat");
+                    b.ToTable("Chats");
                 });
 
             modelBuilder.Entity("TaskBuddy.Models.Message", b =>
@@ -268,7 +268,7 @@ namespace TaskBuddy.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Message");
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("TaskBuddy.Models.Notification", b =>
@@ -316,59 +316,6 @@ namespace TaskBuddy.Data.Migrations
                     b.HasKey("IdTask");
 
                     b.ToTable("Tasks");
-                });
-
-            modelBuilder.Entity("TaskBuddy.Models.Utilisateur", b =>
-                {
-                    b.Property<int>("IdUtilisateur")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdUtilisateur"));
-
-                    b.Property<string>("Adresse")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nom")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Passwd")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Photo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Prenom")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Score")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Tel")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ville")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("IdUtilisateur");
-
-                    b.ToTable("Utilisateur");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
