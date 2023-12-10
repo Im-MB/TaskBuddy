@@ -63,7 +63,7 @@ namespace Test.Areas.Identity.Pages.Account.Manage
             public string Ville { get; set; }
 
             [Display(Name = "Profile Picture")]
-            public byte[] Profil { get; set; }
+            public byte[]? Profil { get; set; }
 
         }
 

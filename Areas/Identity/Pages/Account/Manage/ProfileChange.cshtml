@@ -20,9 +20,7 @@
                 <img id="Profil" alt="Profil" src="~/uploads/avatar-male.jpg"/>
             }
             <div class="custom-file">
-                <input type="file" 
-                    accept="image/*" 
-                    asp-for="Input.Profil" 
+                <input type="file" accept="image/*"  asp-for="Input.Profil" 
                     onchange="document.getElementById('Profil').src = window.URL.createObjectURL(this.file[0])"
                     class="custom-file-input"/>
                 <label class="custom-file-label" asp-for="Input.Profil">Choose Picture...</label>
