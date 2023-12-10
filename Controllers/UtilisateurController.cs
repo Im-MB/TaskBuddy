@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using TaskBuddy.Data;
 using TaskBuddy.Models;
+using System.Net;
+using Test.Areas.Identity.Pages.Account.Manage;
+using System.ComponentModel.DataAnnotations;
+using TaskBuddy.Areas.Identity.Pages.Account;
 
 namespace TaskBuddy.Controllers
 {
@@ -14,11 +18,13 @@ namespace TaskBuddy.Controllers
     {
 
         private readonly UserManager<Utilisateur> userManager;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
 
-        public UtilisateurController(UserManager<Utilisateur> userManager)
+        public UtilisateurController(UserManager<Utilisateur> userManager, IWebHostEnvironment webHostEnvironment)
         {
             this.userManager = userManager;
+            _webHostEnvironment = webHostEnvironment;
         }
 
 
@@ -58,80 +64,6 @@ namespace TaskBuddy.Controllers
             }
         }
 
-        /*
-         [HttpGet]
-         public IActionResult listeuser()
-         {
-             var listeuser = _dbcontext.Utilisateur.ToList();
-
-             return View(listeuser);
-         }
-
-         [HttpGet]
-         public IActionResult crerUser()
-         {
-             return View();
-         }
-
-         [HttpPost]
-         public IActionResult  crerUser(Utilisateur stagire)
-         {
-
-             _dbcontext.Utilisateur.Add(stagire);
-             _dbcontext.SaveChanges();
-             return RedirectToAction(nameof(listeuser));
-
-
-         }
-
-         [HttpGet]
-         public IActionResult afficher(string id)
-         {
-             var user = _dbcontext.Utilisateur.SingleOrDefault(i => i.IdUsers == id);
-             return View(user);
-         }
-
-         [HttpGet]
-         public IActionResult supprimer(int id)
-         {
-             var user = _dbcontext.Utilisateur.Find(id);
-             return View(user);
-         }
-         [HttpPost]
-         public IActionResult supprimer(Utilisateur user)
-         {
-             _dbcontext.Utilisateur.Remove(user);
-             _dbcontext.SaveChanges();
-             return RedirectToAction(nameof(listeuser));
-         }
-
-         [HttpGet]
-         public IActionResult modifier(int id)
-         {
-             var user = _dbcontext.Utilisateur.SingleOrDefault(i => i.IdUtilisateur == id);
-             return View(user);
-         }
-         [HttpPost]
-         public IActionResult modifier(Utilisateur newUser)
-         {
-             var oldUser = _dbcontext.Utilisateur.Find(newUser.IdUtilisateur);
-             if (oldUser != null)
-             {
-                 if (oldUser.Type == newUser.Type)
-                 {
-                     oldUser.Nom = newUser.Nom;
-                     oldUser.Prenom = newUser.Prenom;
-                     oldUser.Adresse = newUser.Adresse;
-                     oldUser.Tel = newUser.Tel;
-                     oldUser.Photo = newUser.Photo;
-                     oldUser.Ville = newUser.Ville;
-                     oldUser.Score = newUser.Score;
-                     _dbcontext.SaveChanges();
-                 }
-             }
-
-             return RedirectToAction(nameof(listeuser));
-         }
-        */
+        
     }
 }

@@ -11,6 +11,54 @@ namespace TaskBuddy.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<string>(
+                name: "Adresse",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "MyScore",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "Nom",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "PhotoUrl",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "Prenom",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "Role",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "Tel",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "Ville",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
+
             migrationBuilder.CreateTable(
                 name: "Chats",
                 columns: table => new
@@ -86,6 +134,38 @@ namespace TaskBuddy.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tasks");
+
+            migrationBuilder.DropColumn(
+                name: "Adresse",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "MyScore",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "Nom",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "PhotoUrl",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "Prenom",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "Role",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "Tel",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "Ville",
+                table: "AspNetUsers");
         }
     }
 }

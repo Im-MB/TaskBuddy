@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -17,11 +18,14 @@ namespace Test.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<Utilisateur> _userManager;
         private readonly SignInManager<Utilisateur> _signInManager;
 
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProfileChangeModel(UserManager<Utilisateur> userManager,SignInManager<Utilisateur> signInManager)
+
+        public ProfileChangeModel(UserManager<Utilisateur> userManager,SignInManager<Utilisateur> signInManager, IWebHostEnvironment webHostEnvironment)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public string Username { get; set; }
@@ -35,7 +39,7 @@ namespace Test.Areas.Identity.Pages.Account.Manage
         [TempData]
         public string StatusMessage { get; set; }
 
-
+        
         public class InputModel
         {
      
@@ -58,9 +62,9 @@ namespace Test.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Ville")]
             public string Ville { get; set; }
 
+            [Display(Name = "Profile Picture")]
+            public byte[] Profil { get; set; }
 
-            [Display(Name = "Photo")]
-            public string Photo { get; set; }
         }
 
 
@@ -87,7 +91,7 @@ namespace Test.Areas.Identity.Pages.Account.Manage
 
                 Ville = userTable.Ville,
 
-                Photo = userTable.Photo,
+                Profil = user.Profil
 
             };
         }
@@ -110,7 +114,6 @@ namespace Test.Areas.Identity.Pages.Account.Manage
         {
             var user = await _userManager.GetUserAsync(User);
 
-
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -121,14 +124,28 @@ namespace Test.Areas.Identity.Pages.Account.Manage
                 await LoadAsync(user);
                 return Page();
             }
+
             if (Input.Nom != user.Nom) {user.Nom = Input.Nom; }
             if (Input.Prenom != user.Prenom) { user.Prenom = Input.Prenom; }
             if (Input.Adresse != user.Adresse) { user.Adresse = Input.Adresse; }
             if (Input.Role != user.Role) { user.Role = Input.Role; }
             if (Input.Tel != user.Tel) { user.Tel = Input.Tel; }
             if (Input.Ville != user.Ville) { user.Ville = Input.Ville; }
-            if (Input.Photo != user.Photo) { user.Photo = Input.Photo; }
 
+
+           
+            
+            if (Request.Form.Files.Count > 0)
+            {
+                var file = Request.Form.Files.FirstOrDefault();
+
+                using (var dataStream = new MemoryStream())
+                {
+                    await file.CopyToAsync(dataStream);
+                    user.Profil = dataStream.ToArray();
+                }
+            }
+            
             var result = await _userManager.UpdateAsync(user);
 
             if (result.Succeeded)
@@ -147,6 +164,6 @@ namespace Test.Areas.Identity.Pages.Account.Manage
 
             
         }
-
+        
     }
 }

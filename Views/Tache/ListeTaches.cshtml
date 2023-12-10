@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TaskBuddy.Models.Tache>
+
+@{
+    ViewData["Title"] = "ListeTaches";
+}
+
+<h1>Liste des Taches</h1>
+
+<p>
+    <a class="btn btn-dark" asp-action="CreateTache">Create New Task</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+               Status
+            </th>
+            <th>
+               Start Date
+            </th>
+            <th>
+               End Date
+            </th>
+            <th>
+               Note
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Etat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateF)
+            </td>
+             <td>
+               @Html.DisplayFor(modelItem => item.Note)
+             </td>
+
+            <td>
+                    <a class="btn btn-success" asp-controller="Tache" asp-action="EditTache" asp-route-id="@item.IdTask">Edit</a> |
+                    <a class="btn btn-secondary" asp-controller="Tache" asp-action="Details" asp-route-id="@item.IdTask">Details</a> |
+                    <a class="btn btn-danger" asp-controller="Tache" asp-action="DeleteTache" asp-route-id="@item.IdTask">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
