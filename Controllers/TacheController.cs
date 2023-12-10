@@ -59,13 +59,13 @@ namespace TaskBuddy.Controllers
         [HttpGet]
         public IActionResult EditTache(int id)
         {
-            var tache=_dbContext.Tasks.Find(id);
+            var tache= _dbContext.Tasks.Find(id);
             return View(tache);
         }
         [HttpPost]  
         public IActionResult EditTache(Tache newTache)
         {
-            var oldTache=_dbContext.Tasks.Find (newTache.IdTask);
+            var oldTache= _dbContext.Tasks.Find(newTache.IdTask);
             if(oldTache != null) { 
             
             oldTache.Nom=newTache.Nom;
