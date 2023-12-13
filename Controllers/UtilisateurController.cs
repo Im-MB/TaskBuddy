@@ -77,7 +77,7 @@ namespace TaskBuddy.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("ListUtilisateur");
+                    return RedirectToAction("ListeUtilisateur");
                 }
 
                 foreach (var error in result.Errors)
@@ -85,7 +85,7 @@ namespace TaskBuddy.Controllers
                     ModelState.AddModelError("", error.Description);
                 }
 
-                return View("ListUtilisateur");
+                return View("ListeUtilisateur");
             }
         }
 

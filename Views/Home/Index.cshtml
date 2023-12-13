@@ -1,9 +1,24 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Utilisateur> SignInManager
+@inject UserManager<Utilisateur> UserManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+<section class="section1">
 
-    Welcome in the home page
+    <div class="index_section1_container">
+        <h1 class="index_section1_h1">Welcome to TaskBuddy</h1>
+        <h3 class="index_section1_h3">Your Ultimate Task Management Companion!</h3>
+        <p class="index_section1_p">
+            Simplify tasks, streamline collaboration.<br />
+            Your smarter way to organize life and work.
+        </p>
+        <a class="btn index_section1_btn" asp-area="Identity" asp-page="/Account/Login">Let’s get started</a>
+    </div>
+    <div class="index_section1_divimg">
+        <img class="index_section1_img" src="~/assests/pic1.png" />
+    </div>
 
-</div>
+</section>

@@ -12,61 +12,64 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TaskBuddy.styles.css" asp-append-version="true" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TaskBuddy</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Tache" asp-action="ListeTaches">Tache</a>
-                            </li>
-                            @if (UserManager.GetUserAsync(User).Result.Role == "admin")
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Utilisateur" asp-action="ListeUtilisateur">user</a>
-                                </li>
-                            }
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Tache" asp-action="ListeTaches">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Tache" asp-action="ListeTaches">About Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Tache" asp-action="ListeTaches">Contact Us</a>
-                            </li>
-                        }
 
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
+
+<body>
+    @if (!SignInManager.IsSignedIn(User))
+    {
+        <header>
+            <div style="width: 100%; height: 80px; position: sticky">
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow ">
+                    <div class="container-fluid">
+                        <!--
+                        <div style="left: 1044px; top: 0px; position: absolute; text-align: center; color: white; font-size: 20px; font-family: Poppins; font-weight: 700; line-height: 28px; word-wrap: break-word">Register</div>
+                        <div style="left: 1155px; top: 0px; position: absolute; text-align: center; color: #7D4FFE; font-size: 20px; font-family: Poppins; font-weight: 700; line-height: 28px; word-wrap: break-word">Log in</div>
+                        -->
+                        <div class="logo" style="margin-left: 208px;"><span>TaskBuddy</span></div>
+                        <ul style="list-style:none;text-align:center;width:100%;padding:0;margin:0;">
+                            <li class="title layout_focus">Home</li>
+                            <li class="title">About Us</li>
+                            <li class="title">Contact Us</li>
+                        </ul>
+                        <div class="login" style="margin-right: 200px;"><partial name="_LoginPartial" /></div>
+                    </div>
+                </nav>
             </div>
-        </nav>
-    </header>
-    
-        <div class="container">
+        </header>
+    }
+    else
+    {
+        <!--Left SideBar-->
+        <div  class="leftsidenav">
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Clients</a>
+            <a href="#">Contact</a>
+            @if (UserManager.GetUserAsync(User).Result.Role == "admin")
+            {
+                <a class="nav-link text-dark" asp-area="" asp-controller="Utilisateur" asp-action="ListeUtilisateur">user</a> 
+            }
+        </div>
+        <!--Right SideBar-->
+        <div class="rightsidenav">
+            <partial name="_LoginPartial" />
+        </div>
+        
+    }
+    <div class="container">
             <main role="main" class="pb-3">
                 @RenderBody()
             </main>
         </div>
 
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
+    @if (!SignInManager.IsSignedIn(User))
+    {
+        <footer class="border-top footer text-muted">
+            <div class="container">
             &copy; 2023 - TaskBuddy - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    }
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

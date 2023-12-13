@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Changa:wght@300;400;500;600;700&family=Poppins:wght@300;400;500&display=swap');
+:root {
+    first_color: #7D4FFE;
+    first_color_hover: #3A3882;
+    second_color: #494949;
+}
+
 html {
   font-size: 14px;
 }
@@ -20,3 +27,216 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/*- Screen Type -Start- -*/
+
+@media (min-width: 576px) {
+    .container-sm, .container {
+        max-width: 540px;
+    }
+    
+}
+
+@media (min-width: 768px) {
+    .container-md, .container-sm, .container {
+        max-width: 720px;
+    }
+    
+}
+
+@media (min-width: 992px) {
+    .container-lg, .container-md, .container-sm, .container {
+        max-width: 960px;
+    }
+    
+}
+
+@media (min-width: 1200px) {
+    .container-xl, .container-lg, .container-md, .container-sm, .container {
+        max-width: 1140px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+        max-width: 1470px;
+    }
+}
+/*- Screen Type -End- -*/
+/*-Left Side Nav Edit --Start-- -*/
+.leftsidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.leftsidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+    .leftsidenav a:hover {
+        color: #f1f1f1;
+    }
+
+
+@media screen and (max-height: 450px) {
+    .leftsidenav {
+        padding-top: 15px;
+    }
+
+        .leftsidenav a {
+            font-size: 18px;
+        }
+}
+
+/*-Left Side Nav Edit --End-- -*/
+/*-Right Side Nav Edit --Start-- -*/
+.rightsidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.rightsidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+@media screen and (max-height: 450px) {
+    .rightsidenav {
+        padding-top: 15px;
+    }
+
+    .rightsidenav a {
+        font-size: 18px;
+    }
+}
+/*-Right Side Nav Edit --End-- -*/
+/*- Header -Start- -*/
+.title {
+    margin:0 12px;
+    display:inline;
+    opacity: 0.60;
+    text-align: center;
+    color: #494949;
+    font-size: 20px;
+    font-family: Poppins;
+    font-weight: 700;
+    line-height: 28px;
+    word-wrap: break-word;
+}
+
+.title:hover {
+    opacity: 1;
+    cursor:pointer;
+}
+.login {
+    text-align: center;
+    color: #7D4FFE;
+    font-size: 20px;
+    font-family: Poppins;
+    font-weight: 500;
+    line-height: 28px;
+    word-wrap: break-word
+}
+
+.register_b {
+    background-color: #7D4FFE;
+    border-radius: 19px;
+    width: 114px;
+    color: white;
+    display: flex;
+    text-decoration: none;
+    padding: 6px 10px;
+    flex-direction: column;
+}
+    .register_b:hover {
+        background-color: #3A3882;
+        color: white;
+    }
+.layout_focus {
+    opacity: 1 !important;
+}
+/*- Header -End- -*/
+/*- Section 1 -Start- -*/
+.section1 {
+    height: 80vh;
+    position:relative;
+}
+.index_section1_container {
+    top: 26%;
+    position: absolute;
+    text-align:center;
+}
+.index_section1_h1 {
+    color: #3A3882;
+    font-size: 55px;
+    font-family: 'Poppins';
+    font-weight: 900;
+    line-height: 70px;
+}
+.index_section1_h3 {
+    color: #3A3882;
+    font-size: 26px;
+    font-family: 'Poppins';
+    font-weight: 700;
+    line-height: 28px;
+    word-wrap: break-word;
+    line-height: 70px;
+}
+.index_section1_p {
+    color: #494949;
+    font-size: 25px;
+    font-family: 'Poppins';
+    font-weight: 400;
+    line-height: 28px;
+}
+.index_section1_btn {
+    color: white;
+    font-size: 20px;
+    font-family: Poppins;
+    font-weight: 500;
+    line-height: 28px;
+    background: #7D4FFE;
+    border-radius: 44px;
+    padding: 14px 20px;
+    margin-top:15px;
+}
+    .index_section1_btn:hover {
+        color: white;
+        background: #3A3882;
+    }
+.index_section1_divimg {
+}
+.index_section1_img {
+    width: 744px;
+    height: 504px;
+    position: absolute;
+    right: 0;
+    /*margin-right: 113px;*/
+    top: 24%;
+}
+/*- section 1 -End- -*/

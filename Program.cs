@@ -29,6 +29,9 @@ else
     app.UseHsts();
 }
 
+//Seeding DataBase
+ApplicationDbInitializer.Seed(app);
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
