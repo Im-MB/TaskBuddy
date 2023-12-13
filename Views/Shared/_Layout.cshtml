@@ -10,6 +10,7 @@
     <title>@ViewData["Title"] - TaskBuddy</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/font-awesome/css/all.min.css"  />
     <link rel="stylesheet" href="~/TaskBuddy.styles.css" asp-append-version="true" />
 </head>
 
@@ -18,13 +19,10 @@
     @if (!SignInManager.IsSignedIn(User))
     {
         <header>
-            <div style="width: 100%; height: 80px; position: sticky">
+            <div style="width: 100%; position: sticky">
                 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow ">
                     <div class="container-fluid">
-                        <!--
-                        <div style="left: 1044px; top: 0px; position: absolute; text-align: center; color: white; font-size: 20px; font-family: Poppins; font-weight: 700; line-height: 28px; word-wrap: break-word">Register</div>
-                        <div style="left: 1155px; top: 0px; position: absolute; text-align: center; color: #7D4FFE; font-size: 20px; font-family: Poppins; font-weight: 700; line-height: 28px; word-wrap: break-word">Log in</div>
-                        -->
+                        
                         <div class="logo" style="margin-left: 208px;"><span>TaskBuddy</span></div>
                         <ul style="list-style:none;text-align:center;width:100%;padding:0;margin:0;">
                             <li class="title layout_focus">Home</li>
@@ -56,11 +54,10 @@
         </div>
         
     }
-    <div class="container">
-            <main role="main" class="pb-3">
+            <main role="main">
                 @RenderBody()
             </main>
-        </div>
+        
 
     @if (!SignInManager.IsSignedIn(User))
     {

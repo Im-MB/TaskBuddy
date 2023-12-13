@@ -5,20 +5,159 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
-<section class="section1">
-
-    <div class="index_section1_container">
-        <h1 class="index_section1_h1">Welcome to TaskBuddy</h1>
-        <h3 class="index_section1_h3">Your Ultimate Task Management Companion!</h3>
-        <p class="index_section1_p">
-            Simplify tasks, streamline collaboration.<br />
-            Your smarter way to organize life and work.
-        </p>
-        <a class="btn index_section1_btn" asp-area="Identity" asp-page="/Account/Login">Let’s get started</a>
+<!--Section 1 -Start- -->
+<section style="width:100vw;background:#F8F9FF;height:92vh;">
+    <div  class="container section1 row">
+        <div class="index_section1_container col-sm-12 col-md-12 col-lg-12 col-xl-6 col-xxl-6">
+            <h1 class="index_section1_h1">Welcome to TaskBuddy</h1>
+            <h3 class="index_section1_h3">Your Ultimate Task Management Companion!</h3>
+            <p class="index_section1_p">
+                Simplify tasks, streamline collaboration.<br />
+                Your smarter way to organize life and work.
+            </p>
+            <a class="btn index_section1_btn" asp-area="Identity" asp-page="/Account/Login">Let’s get started</a>
+        </div>
+        <div class="index_section1_divimg col-xl-6 col-xxl-6">
+            <img class="index_section1_img" src="~/assests/pic1.png" />
+        </div>
     </div>
-    <div class="index_section1_divimg">
-        <img class="index_section1_img" src="~/assests/pic1.png" />
-    </div>
-
 </section>
+<!--Section 1 -End- -->
+<!--Section 2 -Start- -->
+<section style="width:100vw;background:#7D4FFE;height:99vh;overflow: hidden;position: relative;">
+    <div class="container" style="height:100%">
+
+
+        <div style="
+            position: absolute;
+            width: 635px;
+            height: 635px;
+            transform-origin: 0 0;
+            background: #F8F9FF;
+            border-radius: 9999px;
+            top: -261px;
+            left: -322px;
+            opacity: 0.2;"></div>
+        <div style="    
+            position: absolute;
+            width: 496px;
+            height: 496px;
+            transform-origin: 0 0;
+            border-radius: 9999px;
+            border: 3px #F8F9FF solid;
+            top: -104px;
+            left: -56px;
+            opacity: 0.2;"></div>
+        <div style="
+            position: absolute;
+            width: 635px;
+            height: 635px;
+            right: -229px;
+            bottom: -360px;
+            background: #F8F9FF;
+            border-radius: 9999px;
+            opacity: 0.2;">
+        </div>
+        <div style="
+            position: absolute;
+            width: 496px;
+            height: 496px;
+            border-radius: 9999px;
+            border: 3px #F8F9FF solid;
+            right: 26px;
+            bottom: -152px;
+            opacity: 0.2;">
+        </div>
+
+
+
+        <div class="index_section2_title">
+            <h1>With 30+ robust features</h1>
+        </div>
+        <div class="row index_section2_cards">
+            <div class="col-4 index_section2_card1 index_section2_card">
+                <i class="fa-solid fa-calendar-plus icon"></i>
+                <p class="p1">Intuitive Task Creation</p>
+                <p class="p2">
+                    Effortlessly create tasks with<br />
+                    a user-friendly interface.
+                </p>
+            </div>
+            <div class="col-4 index_section2_card2 index_section2_card">
+                <i class="fa-solid fa-list-check icon"></i>
+                <p class="p1">Robust Task Management</p>
+                <p class="p2">
+                    Organize tasks seamlessly, and<br />
+                    categorize them .
+                </p>
+            </div>
+            <div class="col-4 index_section2_card3 index_section2_card">
+                <i class="fa-brands fa-slideshare icon"></i>
+                <p class="p1">Collaborative Sharing</p>
+                <p class="p2">
+                    Share tasks with friends, family<br />
+                    for enhanced teamwork.
+                </p>
+            </div>
+        </div>
+        <div class="index_section2_divbtn">
+            <a class="btn index_section2_btn" asp-area="Identity" asp-page="/Account/Login">Explore more here</a>
+        </div>
+    </div>
+</section>
+<!--Section 2 -End- -->
+<!--Section 3 -Start- -->
+<section>
+    <div class="container">
+        <div class="index_section3_title1">
+            <h1>We are partnered with </h1>
+        </div>
+        <div class="row index_section3_cards">
+            <div class="col-4 index_section3_card1 index_section3_card">
+                <img src="~/assests/irisi-club1024.png"/>
+            </div>
+            <div class="col-4 index_section3_card3 index_section3_card">
+                <img src="~/assests/Logo-FSTg.png" />
+            </div>
+            <div class="col-4 index_section3_card2 index_section3_card">
+                <img src="~/assests/2000.png" />
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="index_section3_title2">
+            <h1>Our Team </h1>
+        </div>
+        <div class="row index_section3_cards_pic">
+            <div class="col-6 index_section2_card1_pic index_section2_card_pic d-flex justify-content-center">
+                <img src="~/assests/avatar-male.jpg" />
+                <div class="infos">
+                    <h4>Mehdi BenMarzouq</h4>
+                    <p>Irisi 1 Student</p>
+                </div>
+            </div>
+            <div class="col-6 index_section2_card2_pic index_section2_card_pic d-flex justify-content-center">
+                <img src="~/assests/avatar-male.jpg" />
+                <div class="infos">
+                    <h4>Mehdi BenMarzouq</h4>
+                    <p>Irisi 1 Student</p>
+                </div>
+            </div>
+            <div class="col-6 index_section2_card3_pic index_section2_card_pic d-flex justify-content-center">
+                <img src="~/assests/avatar-male.jpg" />
+                <div class="infos">
+                    <h4>Mehdi BenMarzouq</h4>
+                    <p>Irisi 1 Student</p>
+                </div>
+            </div>
+            <div class="col-6 index_section2_card3_pic index_section2_card_pic d-flex justify-content-center">
+                <img src="~/assests/avatar-male.jpg" />
+                <div class="infos">
+                    <h4>Mehdi BenMarzouq</h4>
+                    <p>Irisi 1 Student</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Section 3 -End- -->
