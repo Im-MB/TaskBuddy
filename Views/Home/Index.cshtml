@@ -6,7 +6,7 @@
     ViewData["Title"] = "Home Page";
 }
 <!--Section 1 -Start- -->
-<section style="width:100vw;background:#F8F9FF;height:92vh;">
+<section style="background:#F8F9FF;height:92vh;" id="home">
     <div  class="container section1 row">
         <div class="index_section1_container col-sm-12 col-md-12 col-lg-12 col-xl-6 col-xxl-6">
             <h1 class="index_section1_h1">Welcome to TaskBuddy</h1>
@@ -24,7 +24,7 @@
 </section>
 <!--Section 1 -End- -->
 <!--Section 2 -Start- -->
-<section style="width:100vw;background:#7D4FFE;height:99vh;overflow: hidden;position: relative;">
+<section style="background:#7D4FFE;height:99vh;overflow: hidden;position: relative;" id="features">
     <div class="container" style="height:100%">
 
 
@@ -107,7 +107,7 @@
 </section>
 <!--Section 2 -End- -->
 <!--Section 3 -Start- -->
-<section>
+<section class="section3" id="partners">
     <div class="container">
         <div class="index_section3_title1">
             <h1>We are partnered with </h1>
@@ -129,28 +129,28 @@
             <h1>Our Team </h1>
         </div>
         <div class="row index_section3_cards_pic">
-            <div class="col-6 index_section2_card1_pic index_section2_card_pic d-flex justify-content-center">
+            <div class="col-6 index_section3_card1_pic index_section3_card_pic d-flex justify-content-center">
                 <img src="~/assests/avatar-male.jpg" />
                 <div class="infos">
                     <h4>Mehdi BenMarzouq</h4>
                     <p>Irisi 1 Student</p>
                 </div>
             </div>
-            <div class="col-6 index_section2_card2_pic index_section2_card_pic d-flex justify-content-center">
+            <div class="col-6 index_section3_card2_pic index_section3_card_pic d-flex justify-content-center">
                 <img src="~/assests/avatar-male.jpg" />
                 <div class="infos">
                     <h4>Mehdi BenMarzouq</h4>
                     <p>Irisi 1 Student</p>
                 </div>
             </div>
-            <div class="col-6 index_section2_card3_pic index_section2_card_pic d-flex justify-content-center">
+            <div class="col-6 index_section3_card3_pic index_section3_card_pic d-flex justify-content-center">
                 <img src="~/assests/avatar-male.jpg" />
                 <div class="infos">
                     <h4>Mehdi BenMarzouq</h4>
                     <p>Irisi 1 Student</p>
                 </div>
             </div>
-            <div class="col-6 index_section2_card3_pic index_section2_card_pic d-flex justify-content-center">
+            <div class="col-6 index_section3_card3_pic index_section3_card_pic d-flex justify-content-center">
                 <img src="~/assests/avatar-male.jpg" />
                 <div class="infos">
                     <h4>Mehdi BenMarzouq</h4>
@@ -161,3 +161,38 @@
     </div>
 </section>
 <!--Section 3 -End- -->
+<!--Section 4 -Start- -->
+<section class="section4" id="about">
+    <div class="container" style="overflow: hidden;">
+        <div class="row">
+            <div class="col-4 index_section4_img">
+                <img src="~/assests/AboutUs.png"/>
+            </div>
+            <div class="col-8 index_section4_text">
+                <h1>About us</h1>
+                <p class="p1">
+                    At TaskBuddy, we're passionate about<br />
+                    simplifying your life through effective<br />
+                    task management.
+                </p>
+                <p class="p2">
+                    Our journey began with a simple idea:<br />
+                    to create a platform that goes beyond<br />
+                    the ordinary.
+                </p>
+                <p class="p3">
+                    With a rich tapestry of over 30 features,<br />
+                    we stand as your comprehensive solution<br />
+                    for seamless task creation, management,<br />
+                    and collaboration.
+                </p>
+            </div>
+        </div>
+        
+    </div>
+    <div class="index_section4_subscribe">
+        <input type="email" placeholder="Email Here" class="email"/>
+        <div class="btn">Subscribe</div>
+    </div>
+</section>
+<!--Section 4 -End- -->

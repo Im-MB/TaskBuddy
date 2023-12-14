@@ -25,9 +25,10 @@
                         
                         <div class="logo" style="margin-left: 208px;"><span>TaskBuddy</span></div>
                         <ul style="list-style:none;text-align:center;width:100%;padding:0;margin:0;">
-                            <li class="title layout_focus">Home</li>
-                            <li class="title">About Us</li>
-                            <li class="title">Contact Us</li>
+                            <li class="title layout_focus" href="index.aspx#home">Home</li>
+                            <li class="title" href="index.aspx#partners">Our Partners</li>
+                            <li class="title" href="index.aspx#features">Features</li>
+                            <li class="title" href="index.aspx#about">About Us</li>
                         </ul>
                         <div class="login" style="margin-right: 200px;"><partial name="_LoginPartial" /></div>
                     </div>
@@ -54,16 +55,36 @@
         </div>
         
     }
-            <main role="main">
-                @RenderBody()
-            </main>
+<main role="main">
+    @RenderBody()
+</main>
         
 
     @if (!SignInManager.IsSignedIn(User))
     {
-        <footer class="border-top footer text-muted">
+        <footer style="background:#7D4FFE;overflow:hidden;">
+            <div class="footer_img">
+                <img src="~/assests/Footer.png" />
+            </div>
             <div class="container">
-            &copy; 2023 - TaskBuddy - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <div class="footer_infos row">
+                    <div class="footer_logo col-6">TaskBuddy</div>
+                    <div class="footer_liste col-6">
+                        <ul style="list-style:none">
+                            <li>Home</li>
+                            <li>About Us</li>
+                            <li>Contact Us</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer_social">
+                    <i class="fa-brands fa-facebook" style="cursor:pointer;"></i>
+                    <i class="fa-brands fa-instagram" style="cursor:pointer;"></i>
+                    <i class="fa-brands fa-linkedin" style="cursor:pointer;"></i>
+                </div>
+                <div class="footer_copy">
+                    &copy; Copyright.All rights reserved - Made With Love &hearts;
+                </div>
         </div>
     </footer>
     }
