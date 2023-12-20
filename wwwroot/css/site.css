@@ -25,7 +25,7 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  
 }
 
 /*- Screen Type -Start- -*/
@@ -75,33 +75,49 @@ body {
 /*-Left Side Nav Edit --Start-- -*/
 .leftsidenav {
     height: 100%;
-    width: 250px;
+    width: 85px;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #fff;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
 }
 
 .leftsidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
+        text-align: center;
+        text-decoration: none;
+        font-size: 20px;
+        
+        display: block;
+        transition: 0.3s;
+}
+.leftsidenav a i{
+        color: #494949;
+    }
+    .leftsidenav a i:hover {
+        color: #7D4FFE;
+    }
+    .leftsidenav .sideBar_logo {
+        margin-bottom: 100px;
+        color: #7D4FFE;
+    }
+    .leftsidenav a:nth-child(2), .leftsidenav a:nth-child(3), .leftsidenav a:nth-child(4), .leftsidenav a:nth-child(5) {
+        margin: 30px 0;
+    }
+    .leftsidenav .sideBar_settings {
+        position: absolute;
+        bottom: 60px;
+        left: 28px;
+    }
+.leftsidenav a i {
+    font-size: 30px;
 }
 
-    .leftsidenav a:hover {
-        color: #f1f1f1;
-    }
-
-
-@media screen and (max-height: 450px) {
-    .leftsidenav {
+    @media screen and (max-height: 450px) {
+        .leftsidenav {
         padding-top: 15px;
     }
 
@@ -112,30 +128,56 @@ body {
 
 /*-Left Side Nav Edit --End-- -*/
 /*-Right Side Nav Edit --Start-- -*/
+.login_ul{
+    flex-direction:row!important;
+}
 .rightsidenav {
     height: 100%;
-    width: 250px;
+    width: 426px;
     position: fixed;
     z-index: 1;
     top: 0;
     right: 0;
-    background-color: #111;
+    background-color: #F8F9FF;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
 }
 
-.rightsidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-}
+    .rightsidenav .login_userName, .rightsidenav .login_score {
+        color: #000;
+        font-family: Poppins;
+        font-size: 16px;
+        font-style: normal;
+        line-height: normal;
+        padding:0;
+        margin-left:12px;
+    }
 
-@media screen and (max-height: 450px) {
-    .rightsidenav {
+    .rightsidenav .login_userName {
+        font-weight: 800;
+    }
+    .rightsidenav .login_score {
+        font-weight: 300;
+    }
+.logout {
+    color: #494949;
+    text-align: end;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px; 
+    padding-left:0;
+}
+    .logout:hover {
+        color: #7D4FFE;
+    }
+
+
+
+    @media screen and (max-height: 450px) {
+        .rightsidenav {
         padding-top: 15px;
     }
 
@@ -143,6 +185,218 @@ body {
         font-size: 18px;
     }
 }
+
+
+/*- Calendar -Start- -*/
+.calendar {
+    font-family: Arial, sans-serif;
+    max-width: 370px;
+    margin: 20px auto;
+    border-radius: 37px;
+    background: #FFF;
+    padding: 24px 20px 38px;
+}
+
+    .calendar .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+        .calendar .header #month-year {
+            color: #7D4FFE;
+            text-align: center;
+            font-family: Poppins;
+            font-size: 11.925px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+
+.weekdays {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+    .weekdays div {
+        color: #8879A0;
+        text-align: center;
+        font-family: Poppins;
+        font-size: 11.925px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+    .days div {
+        text-align: center;
+        padding: 5px;
+        color: #333;
+        text-align: center;
+        font-family: Poppins;
+        font-size: 11.925px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+.prev, .next {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #7D4FFE;
+    font-size: 12px;
+}
+
+.days .today {
+    border-radius: 9.937px;
+    background: #7D4FFE;
+    color: white;
+    font-weight: bold;
+}
+/*- Calendar -End- -*/
+/*- Task History -Start- -*/
+.task_history {
+    margin: 20px auto;
+    max-width: 370px;
+    border-radius: 37px;
+    background: #FFF;
+    padding: 15px;
+}
+
+    .task_history table {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .task_history .header {
+        color: #7D4FFE;
+        font-family: Poppins;
+        font-size: 25px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        text-align: center;
+    }
+
+    .task_history .history thead tr th {
+        color: #8879A0;
+        font-size: 9px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .task_history .history tbody tr .score {
+        color: #7D4FFE;
+        font-family: Poppins;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    .task_history .history tbody tr .task {
+        color: #000;
+        font-family: Poppins;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        /*I Should Go Back To It*/
+        max-width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /*I Should Go Back To It*/
+    }
+
+    .task_history .history tbody tr .cercle {
+        width: 8px;
+        height: 8px;
+        flex-shrink: 0;
+        background: #7D4FFE;
+        border-radius: 50%;
+    }
+
+    .task_history .history tbody tr .cercle_head {
+        width: 8px;
+        height: 8px;
+        flex-shrink: 0;
+        background: transparent;
+        border-radius: 50%;
+    }
+
+/*If the First Idea didn't Work*/
+/*
+    .task_history table .date_score_header {
+    width: 100%;
+}
+.task_history .header {
+    color: #7D4FFE;
+    font-family: Poppins;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-align: center;
+}
+.task_history .history .date_score_header div {
+    color: #8879A0;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.task_history .history .date_score_infos .score{
+    color: #7D4FFE;
+    font-family: Poppins;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+    .task_history .history .date_score_infos .task {
+        color: #000;
+        font-family: Poppins;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+max-width: 200px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.task_history .history .date_score_infos .cercle {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    background: #7D4FFE;
+    border-radius: 50%;
+}
+
+.task_history .history .date_score_infos .cercle_head {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    background: transparent;
+    border-radius: 50%;
+}
+*/
+
+/*- Task History -End- -*/
 /*-Right Side Nav Edit --End-- -*/
 /*- Header -Start- -*/
 .title {
@@ -505,3 +759,123 @@ margin:100px 0;
     line-height: 52px;
 }
 /*- Footer -End- -*/
+
+/*- DashBoard -Start- -*/
+.dashboard {
+    padding: 59px 455px 27px 141px;
+    background: #F8F9FF;
+}
+
+.dash_search_container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+
+
+.dash_input {
+    border: 1px solid transparent;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border-radius: 20px;
+    background-color: #FFF;
+    color: black;
+    width: 280px;
+}
+
+    .dash_input:focus {
+        border: 1px solid red;
+    }
+
+    .dash_icon {
+        margin: 0;
+        position: absolute;
+        right: 10px;
+        background: transparent;
+        border: none;
+        color: #6f6f6f;
+    }
+
+
+
+.dash_button2 {
+    border-radius: 20px;
+    background: #7D4FFE;
+    display: flex;
+    align-items: center;
+    color: #FFF;
+}
+    .dash_button2 i {
+        font-family: Poppins;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-right: 7px;
+    }
+.dash_button2 a {
+    font-family: Poppins;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+    
+    .dash_button2:hover {
+        background: #3A3882;
+        color: #FFF;
+    }
+
+
+.dash_task_container {
+    position: relative;
+    display: flex;
+    margin-top: 35px;
+}
+    .dash_task_container .dash_tasks {
+        width: 100%;
+        background: white;
+        height: 208px;
+        margin-top: 75px;
+        border-radius: 37px;
+        padding:44px 0 15px 115px;
+    }
+        .dash_task_container .dash_tasks h3 {
+            color: #000;
+            font-family: Poppins;
+            font-size: 22px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+        .dash_task_container .dash_tasks p {
+            color: #000;
+            font-family: Poppins;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 300;
+            line-height: normal;
+        }
+        .dash_task_container .dash_tasks .task_btn {
+            color: #FFF;
+            font-family: Poppins;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 300;
+            line-height: normal;
+            border-radius: 25px;
+            background: #7D4FFE;
+        }
+    .dash_task_container .task_img {
+        position: absolute;
+        right: 110px;
+        bottom:0;
+    }
+        .dash_task_container .task_img img {
+            width: 305.911px;
+            height: 306.362px;
+        }
+/*- DashBoard -End- -*/
+

@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Utilisateur> SignInManager
+@inject UserManager<Utilisateur> UserManager
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<section class="dashboard">
+    <div class="dash_head d-flex justify-content-between">
+        <div class="dash_search_container">
+            <input class="dash_input" type="text" placeholder="Search...">
+            <button class="dash_icon" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <div class="btn dash_button2">
+            <i class="fa-solid fa-plus"></i>
+            <a asp-area="" asp-controller="Tache" asp-action="CreateTache" style="text-decoration:none;color:#fff;">Create new Task</a>
+        </div>
+    </div>
+    <div class="dash_task_container">
+        <div class="dash_tasks">
+            <h3>Today’s Task</h3>
+            <p>Check you daily tasks</p>
+            <div class="btn task_btn"><a asp-area="" asp-controller="Tache" asp-action="ListeTaches" style="text-decoration:none;color:#fff;">Tasks List</a></div>
+        </div>
+        <div class="task_img">
+            <img src="~/assests/Dashboard.png" />
+        </div>
+    </div>
+    
+</section>
+
+
