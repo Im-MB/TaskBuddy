@@ -1,0 +1,29 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+<div class="settings_container" style="height:100vh;">
+    <h1 style="color: #3A3882;font-family: Poppins;font-size: 30px;font-style: normal;font-weight: 700;line-height: normal;">
+        Manage your account <br />Change your account settings
+    </h1>
+
+    <div>
+        <div class="row" style="background:#FFF;border-radius:15px;">
+            <div class="col-md-3" style="    margin-top: 55px;">
+                <partial name="_ManageNav" />
+            </div>
+            <div class="col-md-9" style="    margin-top: 55px;">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

@@ -21,10 +21,14 @@ namespace TaskBuddy.Controllers
 
        
         [HttpGet]
-        public IActionResult ListeTaches()
+        public async Task<IActionResult> ListeTaches()
         {
-            var listeTaches = _dbContext.Tasks.ToList();
-            return View(listeTaches);
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            // Retrieve tasks associated with the current user
+            var userTasks = _dbContext.Tasks.Where(task => task.UserId == currentUser.Id).ToList();
+
+            return View(userTasks);
         }
 
         [HttpGet]

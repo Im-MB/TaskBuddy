@@ -20,13 +20,16 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="Nom" class="control-label header_task" style="    margin: 14px 0;">Title</label>
-                        <input asp-for="Nom" class="form-control" />
+                        <input asp-for="Nom" class="form-control" style="    border-radius: 15px;" />
                         <span asp-validation-for="Nom" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                        <label asp-for="Priority" class="control-label header_task" style="    margin: 14px 0;">Priority</label>
                        
-                        <select asp-for="Priority">
+                        <select asp-for="Priority" style="    display: block;
+    width: 38%;
+    padding: 10px 15px;
+    border-radius: 15px;">
                             <option value="High">High</option>
                             <option value="Medium">Medium</option>
                             <option value="Low">Low</option>
@@ -35,12 +38,12 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="DateF" class="control-label header_task" style="    margin: 14px 0;">End Date</label>
-                        <input asp-for="DateF" class="form-control" />
+                        <input asp-for="DateF" class="form-control" style="    border-radius: 15px;" />
                         <span asp-validation-for="DateF" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Note" class="control-label header_task" style="    margin: 14px 0;">Description</label>
-                        <input asp-for="Note" class="form-control" />
+                        <textarea asp-for="Note" class="form-control" style="    border-radius: 15px;"></textarea>
                         <span asp-validation-for="Note" class="text-danger"></span>
                     </div>
                     <div class="form-group " style="border-radius: 20px;background: #7D4FFE;width:100px;margin-top:15px;">

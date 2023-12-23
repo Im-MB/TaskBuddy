@@ -48,16 +48,19 @@
             <tbody>
         @foreach (var item in Model) {
                 <tr>
-                        <td style="border-bottom:none;">
-                            <input type="checkbox" id="task_@item.IdTask" name="task" value="@item.IdTask">
-                            @if (item.Etat == "in progress")
-                            {
-                                <i class="fa-solid fa-plus" style="background:#7D4FFE;color:#FFF;border-radius:50%;padding:5px;"></i>
-                            }
-                            else if (item.Etat == "done")
-                            {
-                                <i class="fa-solid fa-minus" style="background:#7D4FFE;color:#FFF;border-radius:50%;padding:5px;"></i>
-                            }
+                        <td style="border-bottom:none;" class="custom-checkbox">
+                            <input type="checkbox" id="task_@item.IdTask" name="task" value="@item.IdTask" class="hidden-checkbox">
+                            
+                            <label for="task_@item.IdTask" class="checkbox-label">
+                                @if (item.Etat == "in progress")
+                                {
+                                    <i class="fa-solid fa-plus" style="background:#7D4FFE;color:#FFF;border-radius:50%;padding:5px;"></i>
+                                }
+                                else if (item.Etat == "done")
+                                {
+                                    <i class="fa-solid fa-minus" style="background:#7D4FFE;color:#FFF;border-radius:50%;padding:5px;"></i>
+                                }
+                            </label>
                     </td >
                         <td class="td_tache" style="border-bottom:none;width: 33%;">
                         @Html.DisplayFor(modelItem => item.Nom)

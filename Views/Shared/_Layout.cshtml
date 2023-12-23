@@ -43,13 +43,15 @@
         <div  class="leftsidenav">
             <a asp-area="" asp-controller="Home" asp-action="Dashboard"><i class="fa-solid fa-users-viewfinder sideBar_logo"></i></a>
             <a href="#"><i class="fa-solid fa-bell"></i></a>
+            <a href="#"><i class="fa-solid fa-user-clock"></i></a><!--Invi env-->
+            <a href="#"><i class="fa-solid fa-user-check"></i></a><!-- Invi recu -->
             <a href="#"><i class="fa-solid fa-user-tie"></i></a>
             <a href="#"><i class="fa-solid fa-share"></i></a>
             @if (UserManager.GetUserAsync(User).Result.Role == "admin")
             {
                 <a class="nav-link text-dark" asp-area="" asp-controller="Utilisateur" asp-action="ListeUtilisateur"><i class="fa-solid fa-users-gear"></i></a>
             }
-            <a href="#" ><i class="fa-solid fa-gear sideBar_settings"></i></a>
+            <a title="Manage" asp-area="Identity" asp-page="/Account/Manage/ProfileChange"><i class="fa-solid fa-gear sideBar_settings"></i></a>
         </div>
         <!--Right SideBar-->
         <div class="rightsidenav">
@@ -87,13 +89,13 @@
                                 <th>Score</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="td_cercle"><div class="cercle"></div></td>
-                                <td class="task">Running home for 10 mins and doing exercices </td>
-                                <td class="score">+2</td>
-                            </tr>
-                        </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td class="td_cercle"><div class="cercle"></div></td>
+                                        <td class="task">test</td>
+                                        <td class="score">test</td>
+                                    </tr>
+                                </tbody>
                     </table>
                    
                     

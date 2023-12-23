@@ -918,7 +918,7 @@ margin:100px 0;
 /*- DashBoard -End- -*/
 
 /*- Liste Tache -Start- -*/
-.listeTache, .listeUser, .task_creation_container {
+.listeTache, .listeUser, .task_creation_container, .settings_container {
     margin-left: 90px;
     background: #F8F9FF;
     padding: 59px 500px 27px 85px;
@@ -944,4 +944,47 @@ margin:100px 0;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+}
+
+
+
+/* Hide the default checkbox */
+.hidden-checkbox {
+    display: none;
+}
+
+/* Style the custom checkbox container */
+.custom-checkbox {
+    display: inline-block;
+    position: relative;
+}
+
+/* Style the label as a visual representation of the checkbox */
+.checkbox-label {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 50%;
+    background: #7D4FFE;
+    color: #FFF;
+}
+.couples {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-around;
+}
+.input_change{
+    border-radius: 10px;
+    border: 1px solid #3A3882;
+    background: #FFF;
+}
+
+.nav-link {
+    color: #7D4FFE !important;
+}
+/* use the Id*/
+.active {
+    background: #7D4FFE !important;
+    color: #FFF !important;
 }
