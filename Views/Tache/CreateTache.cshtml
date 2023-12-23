@@ -3,50 +3,64 @@
 @{
     ViewData["Title"] = "CreateTache";
 }
+<div class="task_creation_container" style="height:100vh;">
 
-<h1>CreateTache</h1>
+    <h1 style="color: #7D4FFE;font-family: Poppins;font-size: 27px;font-style: normal;font-weight: 700;line-height: normal;">
+        CreateTache
+    </h1>
 
-<h4>What is you Task for today?</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateTache">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nom" class="control-label">Title</label>
-                <input asp-for="Nom" class="form-control" />
-                <span asp-validation-for="Nom" class="text-danger"></span>
+    <h4 style="color: #3A3882;font-family: Poppins;font-size: 20px;font-style: normal;font-weight: 400;line-height: normal;">
+        What is you Task for today?
+    </h4>
+
+    <div class="row" style="position: relative;justify-content: space-between;">
+        <div class="task_creation col-8" style="background:#FFF;border-radius: 33px;padding: 56px 56px 42px 66px;">
+            <div class="" style="width: 70%;">
+                <form asp-action="CreateTache">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Nom" class="control-label header_task" style="    margin: 14px 0;">Title</label>
+                        <input asp-for="Nom" class="form-control" />
+                        <span asp-validation-for="Nom" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                       <label asp-for="Priority" class="control-label header_task" style="    margin: 14px 0;">Priority</label>
+                       
+                        <select asp-for="Priority">
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <span asp-validation-for="Priority" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DateF" class="control-label header_task" style="    margin: 14px 0;">End Date</label>
+                        <input asp-for="DateF" class="form-control" />
+                        <span asp-validation-for="DateF" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Note" class="control-label header_task" style="    margin: 14px 0;">Description</label>
+                        <input asp-for="Note" class="form-control" />
+                        <span asp-validation-for="Note" class="text-danger"></span>
+                    </div>
+                    <div class="form-group " style="border-radius: 20px;background: #7D4FFE;width:100px;margin-top:15px;">
+                        <i class="fa-solid fa-plus" style="color:#fff;position:relative; left:10px;top:2px;"></i>
+                        <input type="submit" value="Create" class="btn " style="color:#fff;" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group" hidden >
-                <label asp-for="Etat" class="control-label">Status</label>
-                <input asp-for="Etat" class="form-control" value="test"/>
-                <span asp-validation-for="Etat" class="text-danger" ></span>
-            </div>
-            <div class="form-group" hidden>
-                <label asp-for="DateD" class="control-label"></label>
-                <input asp-for="DateD" class="form-control"  disabled value="test"/>
-                <span asp-validation-for="DateD" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Note" class="control-label">Note</label>
-                <textarea type="text" asp-for="Note" class="form-control" ></textarea>
-                <span asp-validation-for="DateF" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateF" class="control-label">End Date</label>
-                <input asp-for="DateF" class="form-control" />
-                <span asp-validation-for="DateF" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+
+        <div class="task_image" style="width: 517px;
+    height: 524.383px;
+    flex-shrink: 0;position:absolute;right:0;">
+            <img src="~/assests/taskCreate.png"/>
+        </div>
     </div>
-</div>
+    <div class="btn" style="border-radius: 20px;background: #7D4FFE;width:150px;margin-top:15px;">
+        <a asp-action="ListeTaches" style="text-decoration:none;color:#fff;">Back to List</a>
+    </div>
 
-<div>
-    <a class="btn btn-light" asp-action="ListeTaches">Back to List</a>
 </div>
 
 @section Scripts {

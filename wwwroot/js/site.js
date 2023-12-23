@@ -128,23 +128,26 @@ displayCalendar();
 
 //--------------------------------------------------------------
 
+document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', async event => {
+        const taskId = event.target.value;
 
-$(document).ready(function () {
-    $('input[type="checkbox"]').change(function () {
-        var taskId = $(this).closest('tr').find('td:eq(0)').text(); // Assuming the task ID is in the first column
-        var isChecked = $(this).prop('checked');
+        try {
+            const response = await fetch(`/Tache/UpdateStatus/${taskId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ taskId }) 
+            });
 
-        // Make an Ajax request to update the task status
-        $.ajax({
-            url: '/Tache/UpdateStatus', // Your update status endpoint
-            type: 'POST',
-            data: { taskId: taskId, isChecked: isChecked },
-            success: function (response) {
-                // Handle success if needed
-            },
-            error: function (xhr, status, error) {
-                // Handle error if needed
+            if (response.ok) {
+                location.reload();
+            } else {
+                console.error('Failed to update task status');
             }
-        });
+        } catch (error) {
+            console.error('Error updating task status:', error);
+        }
     });
 });

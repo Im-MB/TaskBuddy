@@ -6,92 +6,106 @@
     ViewData["Title"] = "Liste Utilisateur";
 }
 
-<h1>List Users</h1>
 @if (UserManager.GetUserAsync(User).Result.Role == "admin")
 {
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Prenom)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nom)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Ville)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Adresse)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Role)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Profil)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+<div class="listeUser" style="height:100vh;">
+    <div class="user_header">
+            <div class="dash_search_container">
+                <input class="dash_input" type="text" placeholder="Search...">
+                <button class="dash_icon" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+    </div>
+
+
+   <div class="listeUserContainer" style="border-radius: 25px;background: #FFF;height:90%;padding-left:25px;">
+
+
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Prenom)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nom)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ville)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Adresse)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Role)
-                    </td>
-                    <td>
-                        @if (UserManager.GetUserAsync(User).Result.Profil is not null)
-                        {
-                            <img class="rounded-circle" alt="Profil" width="40" height="40" src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.Profil))" />
-
-                        }
-                        else
-                        {
-                            <img id="Profil" class="rounded-circle" alt="Profil" width="40" height="40" src="~/uploads/avatar-male.jpg" />
-                        }
-                    </td>
-                    <td>
-                        @if (UserManager.GetUserId(User) != item.Id)
-                        {
-                        <a asp-action = "Delete" asp-route-id= "@item.Id" > Delete </a>
-                        }
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-
-                        <a asp-action="EditUtilisateur" asp-route-id="@item.Id">Edit</a>
-
-                    </td>
+                        <th style="border-bottom:none;padding-bottom: 20px;">
+                            @Html.DisplayNameFor(model => model.Profil)
+                        </th>
+                        <th style="border-bottom:none;padding-bottom: 20px;">
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                        <th style="border-bottom:none;padding-bottom: 20px;">
+                        @Html.DisplayNameFor(model => model.Prenom)
+                    </th>
+                        <th style="border-bottom:none;padding-bottom: 20px;">
+                        @Html.DisplayNameFor(model => model.Nom)
+                    </th>
+                        <th style="border-bottom:none;padding-bottom: 20px;">
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                        <th style="border-bottom:none;padding-bottom: 20px;">
+                        @Html.DisplayNameFor(model => model.Ville)
+                    </th>
+                        <th style="border-bottom:none;padding-bottom: 20px;">
+                        @Html.DisplayNameFor(model => model.Adresse)
+                    </th>
+                        <th style="border-bottom:none;padding-bottom: 20px;">
+                        @Html.DisplayNameFor(model => model.Role)
+                    </th>
+                        
+                        <th style="border-bottom:none;"></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                            <td class="td_tache" style="border-bottom:none;">
+                                @if (UserManager.GetUserAsync(User).Result.Profil is not null)
+                                {
+                                    <img class="rounded-circle" alt="Profil" width="40" height="40" src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.Profil))" />
+
+                                }
+                                else
+                                {
+                                    <img id="Profil" class="rounded-circle" alt="Profil" width="40" height="40" src="~/uploads/avatar-male.jpg" />
+                                }
+                            </td>
+                            <td class="td_tache" style="border-bottom:none;">
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                            <td class="td_tache" style="border-bottom:none;">
+                            @Html.DisplayFor(modelItem => item.Prenom)
+                        </td>
+                            <td class="td_tache" style="border-bottom:none;">
+                            @Html.DisplayFor(modelItem => item.Nom)
+                        </td>
+                            <td class="td_tache" style="border-bottom:none;">
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                            <td class="td_tache" style="border-bottom:none;">
+                            @Html.DisplayFor(modelItem => item.Ville)
+                        </td>
+                            <td class="td_tache" style="border-bottom:none;">
+                            @Html.DisplayFor(modelItem => item.Adresse)
+                        </td>
+                            <td class="td_tache" style="border-bottom:none;">
+                            @Html.DisplayFor(modelItem => item.Role)
+                        </td>
+                            
+                            <td class="td_tache" style="border-bottom:none;">
+                                <a asp-action="Details" asp-route-id="@item.Id" style="color: #3A3882;text-align: center;font-family: Poppins;font-size: 16px;font-style: normal;font-weight: 600;line-height: normal;text-decoration: none;
+    padding: 0 10px;">Details</a>
+
+                                <a asp-action="EditUtilisateur" asp-route-id="@item.Id" style="color: rgba(252, 164, 101, 0.88);text-align: center;font-family: Poppins;font-size: 16px;font-style: normal;font-weight: 600;line-height: normal;text-decoration: none;
+    padding: 0 10px;">Edit</a>
+                                @if (UserManager.GetUserId(User) != item.Id)
+                                {
+                                    <a asp-action="Delete" asp-route-id="@item.Id" style="color: #7D4FFE;text-align: center;font-family: Poppins;font-size: 16px;font-style: normal;font-weight: 600;line-height: normal;text-decoration: none;
+    padding: 0 10px;"> Delete </a>
+                                }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+   </div>
+</div>
 }
 else
 {

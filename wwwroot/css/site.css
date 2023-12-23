@@ -918,8 +918,30 @@ margin:100px 0;
 /*- DashBoard -End- -*/
 
 /*- Liste Tache -Start- -*/
-.listeTache {
+.listeTache, .listeUser, .task_creation_container {
     margin-left: 90px;
     background: #F8F9FF;
-    padding:59px 500px 27px 85px;
+    padding: 59px 500px 27px 85px;
+}
+.td_tache {
+    color: #000;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+.task_header,.user_header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+/*- Liste Tache -End- -*/
+.header_task {
+    color: #494949;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }

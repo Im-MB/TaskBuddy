@@ -55,15 +55,12 @@ namespace TaskBuddy.Controllers
             return View(tache);
         
         }
+        
         [HttpGet]
+        [HttpPost]
         public IActionResult DeleteTache(int id)
         {
-            var tache=_dbContext.Tasks.SingleOrDefault(t => t.IdTask == id);
-            return View(tache);
-        }
-        [HttpPost]
-        public IActionResult DeleteTache(Tache tache)
-        {
+            var tache = _dbContext.Tasks.SingleOrDefault(t => t.IdTask == id);
             _dbContext.Tasks.Remove(tache);
             _dbContext.SaveChanges();
             return RedirectToAction(nameof(ListeTaches));
@@ -92,19 +89,20 @@ namespace TaskBuddy.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateStatus(int taskId, bool isChecked)
+        [Route("Tache/UpdateStatus/{id}")]
+        public IActionResult UpdateTaskStatus(int id)
         {
-            
-            var task = _dbContext.Tasks.Find(taskId); 
+            var task = _dbContext.Tasks.Find(id);
+
             if (task != null)
             {
-                task.Etat = isChecked ? "done" : "in progress";
-                
-                _dbContext.Update(task); 
-                                                  
-                return Json(new { success = true });
+                task.Etat = task.Etat == "in progress" ? "done" : "in progress";
+                _dbContext.Update(task);
+                _dbContext.SaveChanges();
+                return Ok();
             }
-            return Json(new { success = false });
+
+            return NotFound();
         }
 
 

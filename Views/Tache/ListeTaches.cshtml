@@ -5,35 +5,42 @@
 @{
     ViewData["Title"] = "ListeTaches";
 }
-<div class="listeTache">
+<div class="listeTache" style="height:100vh;">
+    <div class="task_header">
+        <div class="dash_search_container">
+            <input class="dash_input" type="text" placeholder="Search...">
+            <button class="dash_icon" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <div class="btn dash_button2">
+            <i class="fa-solid fa-plus"></i>
+            <a  asp-action="CreateTache" style="text-decoration:none;color:#fff;">Create New Task</a>
+        </div>
+    </div>
+    
 
-    <p>
-        <a class="btn btn-dark" asp-action="CreateTache" >Create New Task</a>
-    </p>
-
-    <div class="listeTacheContainer">
+    <div class="listeTacheContainer" style="border-radius: 25px;background: #FFF;height:90%;padding-left:25px;">
 
     
 
         <table class="table">
             <thead>
                 <tr>
-                    <th>
+                    <th style="border-bottom:none;">
                 
                     </th>
-                    <th>
+                    <th style="border-bottom:none;padding-bottom: 20px;width: 33%;">
                         Task Title
                     </th>
-                    <th>
+                    <th style="border-bottom:none;padding-bottom: 20px;">
                        Status
                     </th>
-                    <th>
+                    <th style="border-bottom:none;padding-bottom: 20px;">
                         Due Date
                     </th>
-                    <th>
+                    <th style="border-bottom:none;padding-bottom: 20px;">
                         Priority
                     </th>
-                    <th>
+                    <th style="border-bottom:none;padding-bottom: 20px;">
                         Reward
                     </th>
                 </tr>
@@ -41,29 +48,41 @@
             <tbody>
         @foreach (var item in Model) {
                 <tr>
-                    <td>
-                            <input type="checkbox" id="task" name="task" value="">
-                    </td>
-                    <td>
+                        <td style="border-bottom:none;">
+                            <input type="checkbox" id="task_@item.IdTask" name="task" value="@item.IdTask">
+                            @if (item.Etat == "in progress")
+                            {
+                                <i class="fa-solid fa-plus" style="background:#7D4FFE;color:#FFF;border-radius:50%;padding:5px;"></i>
+                            }
+                            else if (item.Etat == "done")
+                            {
+                                <i class="fa-solid fa-minus" style="background:#7D4FFE;color:#FFF;border-radius:50%;padding:5px;"></i>
+                            }
+                    </td >
+                        <td class="td_tache" style="border-bottom:none;width: 33%;">
                         @Html.DisplayFor(modelItem => item.Nom)
                     </td>
-                    <td>
+                        <td class="td_tache" style="border-bottom:none;">
                         @Html.DisplayFor(modelItem => item.Etat)
                     </td>
-                    <td>
+                        <td class="td_tache" style="border-bottom:none;">
                             @Html.DisplayFor(modelItem => item.DateF)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Reward)
+                        <td class="td_tache" style="border-bottom:none;">
+                        @Html.DisplayFor(modelItem => item.Priority)
                     </td>
-                     <td>
-                       @Html.DisplayFor(modelItem => item.Note)
+                        <td class="td_tache" style="border-bottom:none;">
+                       @Html.DisplayFor(modelItem => item.Reward)
                      </td>
 
-                    <td>
-                            <a class="btn btn-success" asp-controller="Tache" asp-action="EditTache" asp-route-id="@item.IdTask">Edit</a> |
-                            <a class="btn btn-secondary" asp-controller="Tache" asp-action="Details" asp-route-id="@item.IdTask">Details</a> |
-                            <a class="btn btn-danger" asp-controller="Tache" asp-action="DeleteTache" asp-route-id="@item.IdTask">Delete</a>
+                        <td style="border-bottom:none;">
+                            <a class="btn" asp-controller="Tache" asp-action="EditTache" asp-route-id="@item.IdTask" 
+                            style="color: #7D4FFE;text-align: center;font-family: Poppins;font-size: 16px;font-style: normal;font-weight: 600;line-height: normal;">
+                            Edit</a>
+                            <a class="btn" asp-controller="Tache" asp-action="Details" asp-route-id="@item.IdTask" style="color: #3A3882;text-align: center;font-family: Poppins;font-size: 16px;font-style: normal;font-weight: 600;line-height: normal;">
+                            Details</a>
+                            <a class="btn" asp-controller="Tache" asp-action="DeleteTache" asp-route-id="@item.IdTask" style="color: rgba(252, 164, 101, 0.88);text-align: center;font-family: Poppins;font-size: 16px;font-style: normal;font-weight: 600;line-height: normal;">
+                            Delete</a>
                     </td>
                 </tr>
         }
