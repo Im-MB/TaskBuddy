@@ -27,7 +27,41 @@
             <img src="~/assests/Dashboard.png" />
         </div>
     </div>
-    
+    <div class="dashboard_footer row d-flex justify-content-between " style="padding-right:0;">
+        <div class="charts col-8">
+            <div class="task_completed">
+
+            </div>
+            <div class="task_completed2">
+
+            </div>
+        </div>
+        <div class="friends_list col-3" style="padding-right:0;max-height:544px;">
+            <h3>Friends List</h3>
+            <div class="d-flex justify-content-between dashboard_footer_container1 align-items-center">
+                <div class="dashboard_footer_img">
+                    @if (UserManager.GetUserAsync(User).Result.Profil is not null)
+                    {
+                        <img class="rounded-circle" alt="Profil" width="40" height="40" src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.Profil))" />
+
+                    }
+                    else
+                    {
+                        <img id="Profil" class="rounded-circle" alt="Profil" width="40" height="40" src="~/uploads/avatar-male.jpg" />
+                    }
+                </div>
+                <p style="margin:0;">
+                    friend one
+                </p>
+                <a style="text-decoration:none;margin-top:8px;">
+                    <i class="fa-solid fa-message"></i>
+                </a>
+            </div>
+            <div class="btn " style="border-radius: 30px;background: #3A3882;color: #FFF;font-family: Poppins;font-size: 16px;font-style: normal;font-weight: 600;line-height: normal;padding:8px 38px;margin-bottom:15px;">
+                See all
+            </div>
+        </div>
+    </div>
 </section>
 
 

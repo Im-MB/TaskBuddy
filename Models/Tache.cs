@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TaskBuddy.Models
 {
@@ -17,5 +18,22 @@ namespace TaskBuddy.Models
         public DateTime DateF { get; set; }
         [Required]
         public string? Note { get; set; }
+        [Required]
+        public int? Reward { get; set; }
+
+        [Required]
+        public string? Priority { get; set; }
+
+
+        public string? UserId { get; set; }
+
+        [ForeignKey("UserId")]
+
+          public Utilisateur Utilisateur { get; set; }
+
+
+
+
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography.Xml;
 using TaskBuddy.Data;
@@ -10,10 +11,12 @@ namespace TaskBuddy.Controllers
     public class TacheController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly UserManager<Utilisateur> _userManager;
 
-        public TacheController(ApplicationDbContext dbContext)
+        public TacheController(ApplicationDbContext dbContext, UserManager<Utilisateur> userManager)
         {
             _dbContext = dbContext;
+            _userManager = userManager;
         }
 
        
@@ -23,16 +26,26 @@ namespace TaskBuddy.Controllers
             var listeTaches = _dbContext.Tasks.ToList();
             return View(listeTaches);
         }
+
         [HttpGet]
         public IActionResult CreateTache() {
             return View();
                 
          }
         [HttpPost]
-        public IActionResult CreateTache(Tache tache)
+        public async Task<IActionResult> CreateTache(Tache tache)
         {
-            _dbContext.Tasks.Add(tache);
-            _dbContext.SaveChanges();
+            var userId = _userManager.GetUserId(User);
+            if (userId != null)
+            {
+                tache.UserId = userId;
+                tache.Etat = "in progress";
+                tache.Priority = "High";
+                tache.Reward = 0;
+                tache.DateD = DateTime.Now;
+                _dbContext.Tasks.Add(tache);
+                _dbContext.SaveChanges();
+            }
             return RedirectToAction(nameof(ListeTaches)) ;
         }
         [HttpGet]
@@ -76,7 +89,24 @@ namespace TaskBuddy.Controllers
              _dbContext.SaveChanges();
             }
             return RedirectToAction(nameof(ListeTaches));
-        }    
+        }
 
-    } 
+        [HttpPost]
+        public IActionResult UpdateStatus(int taskId, bool isChecked)
+        {
+            
+            var task = _dbContext.Tasks.Find(taskId); 
+            if (task != null)
+            {
+                task.Etat = isChecked ? "done" : "in progress";
+                
+                _dbContext.Update(task); 
+                                                  
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
+        }
+
+
+    }
 }

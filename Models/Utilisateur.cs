@@ -24,6 +24,8 @@ namespace TaskBuddy.Models
         
         public byte[]? Profil { get; set; }
 
+        public ICollection<Tache> Taches { get; set; }
+
         //---------------------------------
 
 

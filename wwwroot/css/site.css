@@ -877,5 +877,49 @@ margin:100px 0;
             width: 305.911px;
             height: 306.362px;
         }
+.dashboard_footer {
+    margin: 20px 0;
+    
+    background: #F8F9FF;
+    padding: 15px;
+}
+.friends_list {
+    background: #FFF;
+    border-radius: 37px;
+    text-align:center;
+    
+}
+    .friends_list h3 {
+        color: #3A3882;
+        font-family: Poppins;
+        font-size: 25px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin: 23px 0;
+
+    }
+.dashboard_footer_container1{
+    padding:0 40px;
+    margin:20px 0;
+}
+.dashboard_footer_container1 p {
+    color: #000;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+.dashboard_footer_container1 a i{
+    color: #3A3882;
+    font-size: 30px;
+}
 /*- DashBoard -End- -*/
 
+/*- Liste Tache -Start- -*/
+.listeTache {
+    margin-left: 90px;
+    background: #F8F9FF;
+    padding:59px 500px 27px 85px;
+}

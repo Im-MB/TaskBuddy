@@ -126,3 +126,25 @@ function nextMonth() {
 
 displayCalendar();
 
+//--------------------------------------------------------------
+
+
+$(document).ready(function () {
+    $('input[type="checkbox"]').change(function () {
+        var taskId = $(this).closest('tr').find('td:eq(0)').text(); // Assuming the task ID is in the first column
+        var isChecked = $(this).prop('checked');
+
+        // Make an Ajax request to update the task status
+        $.ajax({
+            url: '/Tache/UpdateStatus', // Your update status endpoint
+            type: 'POST',
+            data: { taskId: taskId, isChecked: isChecked },
+            success: function (response) {
+                // Handle success if needed
+            },
+            error: function (xhr, status, error) {
+                // Handle error if needed
+            }
+        });
+    });
+});
