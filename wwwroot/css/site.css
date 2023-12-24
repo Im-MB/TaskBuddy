@@ -783,10 +783,13 @@ margin:100px 0;
     background-color: #FFF;
     color: black;
     width: 280px;
+    transition: width 0.3s ease;
 }
 
     .dash_input:focus {
-        border: 1px solid red;
+        border: 1px solid #7D4FFE;
+        box-shadow:none;
+        width:480px;
     }
 
     .dash_icon {
@@ -980,11 +983,25 @@ margin:100px 0;
     background: #FFF;
 }
 
-.nav-link {
-    color: #7D4FFE !important;
+#profileChange, #email, #change-password, #two-factor, #personal-data {
+    color: #7D4FFE ;
 }
-/* use the Id*/
 .active {
     background: #7D4FFE !important;
     color: #FFF !important;
+}
+.input_focus:focus {
+    border-radius: 10px;
+    border: 2px solid #3A3882;
+    background: #FFF;
+    box-shadow:none;
+}
+.hoverr {
+    cursor: not-allowed;
+}
+
+/*-- Login -start- --*/
+.login_section{
+    margin:0 208px;
+    height:100vh;
 }

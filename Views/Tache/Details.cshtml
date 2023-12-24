@@ -3,46 +3,126 @@
 @{
     ViewData["Title"] = "Details";
 }
+<div class="task_creation_container" style="height:100vh;">
 
-<h1>Details</h1>
+    <h1 style="color: #7D4FFE;font-family: Poppins;font-size: 27px;font-style: normal;font-weight: 700;line-height: normal;">
+        Task Details
+    </h1>
 
-<div>
-    <h4>Tache</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nom)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nom)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Etat)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Etat)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateD)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateD)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateF)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateF)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Note)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a class="btn btn-success" asp-action="EditTache" asp-route-id="@Model?.IdTask">Edit</a> |
-    <a class="btn btn-warning" asp-action="ListeTaches">Back to List</a>
+    <div class="row" style="position: relative;justify-content: space-between;">
+            <div class="task_creation col-8" style="background:#FFF;border-radius: 33px;padding: 56px 56px 42px 66px;">
+                <div class="" style="width: 70%;">
+
+                <div class="">
+                    <div style="color: #494949;
+                    font-family: Poppins;margin:15px 0;
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;">
+                        @Html.DisplayNameFor(model => model.Nom) :
+                    </div>
+                    <div >
+                        <div class="hoverr" style="width: 255px;
+                            height: 44px;    padding: 10px 15px;
+                            flex-shrink: 0;border-radius: 10px;
+                            border: 1px solid #494949;
+                            background: #FFF;">
+                            @Html.DisplayFor(model => model.Nom)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div style="color: #494949;
+                    font-family: Poppins;margin:15px 0;
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;">
+                        @Html.DisplayNameFor(model => model.Etat) :
+                    </div>
+                    <div >
+                        <div class="hoverr" style="width: 255px;
+                            height: 44px;    padding: 10px 15px;
+                            flex-shrink: 0;border-radius: 10px;
+                            border: 1px solid #494949;
+                            background: #FFF;">
+                            @Html.DisplayFor(model => model.Etat)
+                        </div>
+                    </div>
+                </div>
+                        
+                <div class="">
+                    <div style="color: #494949;
+                    font-family: Poppins;margin:15px 0;
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;">
+                        Date de Debut :
+                    </div>
+                    <div >
+                        <div class="hoverr" style="width: 255px;
+                            height: 44px;    padding: 10px 15px;
+                            flex-shrink: 0;border-radius: 10px;
+                            border: 1px solid #494949;
+                            background: #FFF;">
+                            @Html.DisplayFor(model => model.DateD)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div style="color: #494949;
+                    font-family: Poppins;margin:15px 0;
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;">
+                        Date de Fin :
+                    </div>
+                    <div >
+                        <div class="hoverr" style="width: 255px;
+                            height: 44px;    padding: 10px 15px;
+                            flex-shrink: 0;border-radius: 10px;
+                            border: 1px solid #494949;
+                            background: #FFF;">
+                            @Html.DisplayFor(model => model.DateF)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div style="color: #494949;
+                    font-family: Poppins;margin:15px 0;
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;">
+                        Description :
+                    </div>
+                    <div class="">
+                        <div class="hoverr" style="width: 255px;
+                            height: 44px;    padding: 10px 15px;
+                            flex-shrink: 0;border-radius: 10px;
+                            border: 1px solid #494949;
+                            background: #FFF;">
+                            @Html.DisplayFor(model => model.Note)
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </div>
+        <div class="task_image" style="width: 517px;
+    height: 524.383px;
+    flex-shrink: 0;position:absolute;right:0;">
+            <img src="~/assests/taskCreate.png" />
+        </div>
+    </div>
+    
+    <div class="btn" style="border-radius: 20px;background: #7D4FFE;width:150px;margin-top:15px;">
+        <a asp-action="ListeTaches" style="text-decoration:none;color:#fff;">Back to List</a>
+    </div>
+
 </div>

@@ -14,20 +14,21 @@ namespace TaskBuddy.Models
 
         public string? Adresse { get; set; }
 
-        public string? Role { get; set; } 
+        public string? Role { get; set; } = "normalUser";
 
         public string? Tel { get; set; }
-        
+
         public string? Ville { get; set; }
-        
+
         public string? MyScore { get; set; }
-        
+
         public byte[]? Profil { get; set; }
 
         public ICollection<Tache> Taches { get; set; }
 
         //---------------------------------
 
+        
 
     }
 }

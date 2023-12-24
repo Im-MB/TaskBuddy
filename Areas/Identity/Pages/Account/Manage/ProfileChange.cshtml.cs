@@ -125,10 +125,12 @@ namespace Test.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
+
+
             if (Input.Nom != user.Nom) {user.Nom = Input.Nom; }
             if (Input.Prenom != user.Prenom) { user.Prenom = Input.Prenom; }
             if (Input.Adresse != user.Adresse) { user.Adresse = Input.Adresse; }
-            if (Input.Role != user.Role) { user.Role = Input.Role; }
+            if (Input.Role != user.Role){user.Role = Input.Role;}
             if (Input.Tel != user.Tel) { user.Tel = Input.Tel; }
             if (Input.Ville != user.Ville) { user.Ville = Input.Ville; }
 

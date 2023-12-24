@@ -25,18 +25,30 @@ namespace TaskBuddy.Data
                 {
                     adminUser = new Utilisateur
                     {
-                        UserName = "Admin",
+                        UserName = adminEmail,
                         Email = adminEmail,
+                        Ville = "____"
                     };
 
                     var createAdmin = await userManager.CreateAsync(adminUser, "Admin_001");
+                    
                     if (createAdmin.Succeeded)
                     {
-                        // Generate email confirmation token and confirm the email
+                        adminUser.Nom = "Admin";
+                        adminUser.MyScore = "0";
+                        adminUser.Prenom = "Admin";
+                        adminUser.Ville = "_______";
+                        adminUser.Adresse = "_______";
+                        adminUser.Role = "admin";
+                        await userManager.UpdateAsync(adminUser);
                         var token = await userManager.GenerateEmailConfirmationTokenAsync(adminUser);
                         await userManager.ConfirmEmailAsync(adminUser, token);
 
                     }
+
+                    
+
+
 
                 }
 

@@ -25,7 +25,6 @@ namespace TaskBuddy.Controllers
         {
             var currentUser = await _userManager.GetUserAsync(User);
 
-            // Retrieve tasks associated with the current user
             var userTasks = _dbContext.Tasks.Where(task => task.UserId == currentUser.Id).ToList();
 
             return View(userTasks);

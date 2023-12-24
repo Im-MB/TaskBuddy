@@ -1,36 +1,136 @@
-﻿@model TaskBuddy.Models.Utilisateur
+﻿@using Microsoft.AspNetCore.Identity
+@model TaskBuddy.Models.Utilisateur
+@inject UserManager<Utilisateur> UserManager
 @{
     ViewData["Title"] = "EditUtilisateur";
 }
 
-<h1>EditUtilisateur</h1>
+<div class="task_creation_container" style="height:100vh;">
+    <h1 style="color: #7D4FFE;
+        font-family: Poppins;
+        font-size: 27px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;">
+        EditUtilisateur
+    </h1>
 
 
-<h4>Utilisateur</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditUtilisateur">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Role" class="control-label">Role</label>
-                <select asp-for="Role">
-                    <option value="admin">admin</option>
-                    <option value="normalUser">normalUser</option>
-                </select>
-                <span asp-validation-for="Role" class="text-danger"></span>
+    <h4 style="    color: #3A3882;
+        font-family: Poppins;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;">
+        Utilisateur
+    </h4>
+
+    <div class="row" style="position: relative;justify-content: space-between;">
+            <div class="task_creation col-8" style="background:#FFF;border-radius: 33px;padding: 56px 56px 42px 66px;position:relative;">
+                <div class="" style="width: 100%;">
+
+                <div style="position:absolute;top: 20px;left: 20px;">
+                    <a asp-action="ListeUtilisateur"><i class="fa-solid fa-angles-left" style="font-size:35px;color:#7D4FFE;"></i></a>
+                </div>
+                @if (UserManager.GetUserAsync(User).Result.Profil is not null)
+                {
+                    <div class="nav-item" style="margin-left: 50px;margin-bottom:25px;text-align: center;">
+                        <img class="rounded-circle" alt="Profil" width="200" height="200" src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.Profil))" />
+                    </div>
+                }
+
+                <div class="">
+                    <div style="color: #494949;
+                    font-family: Poppins;margin:15px 0;
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;">
+                        Username :
+                    </div>
+                    <div >
+                        <div class="hoverr" style="width: 255px;
+                            height: 44px;    padding: 10px 15px;
+                            flex-shrink: 0;border-radius: 10px;
+                            border: 1px solid #494949;
+                            background: #FFF;">
+                            @UserManager.GetUserAsync(User).Result.UserName
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div style="color: #494949;
+                    font-family: Poppins;margin:15px 0;
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;">
+                        FullName :
+                    </div>
+                    <div >
+                        <div class="hoverr" style="width: 255px;
+                            height: 44px;    padding: 10px 15px;
+                            flex-shrink: 0;border-radius: 10px;
+                            border: 1px solid #494949;
+                            background: #FFF;">
+                            @UserManager.GetUserAsync(User).Result.Nom @UserManager.GetUserAsync(User).Result.Prenom
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div style="color: #494949;
+                    font-family: Poppins;margin:15px 0;
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: normal;">
+                        Email :
+                    </div>
+                    <div >
+                        <div class="hoverr" style="width: 255px;
+                            height: 44px;    padding: 10px 15px;
+                            flex-shrink: 0;border-radius: 10px;
+                            border: 1px solid #494949;
+                            background: #FFF;">
+                            @UserManager.GetUserAsync(User).Result.Email
+                        </div>
+                    </div>
+                </div>
+
+                <form asp-action="EditUtilisateur">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="Role" class="control-label" style="color: #494949;
+                        font-family: Poppins;margin:15px 0;
+                        font-size: 20px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: normal;">Role</label>
+                        <select asp-for="Role" style="display: block;
+                        width: 38%;
+                        padding: 10px 15px;
+                        border-radius: 15px;">
+                            <option value="admin">admin</option>
+                            <option value="normalUser">normalUser</option>
+                        </select>
+                        <span asp-validation-for="Role" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style="border-radius: 20px;
+                        background: #7D4FFE;text-align:center;
+                        width: 100px;
+                        margin-top: 15px;">
+                        <input type="submit" value="Save" class="btn" style="color:white;"/>
+                    </div>
+
+                </form>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-success" />
-            </div>
-        </form>
+        </div>
+            
     </div>
-</div>
 
-<div>
-    <a class="btn btn-warning" asp-action="ListeTaches">Back to List</a>
-</div>
 
 @section Scripts {
     @{
