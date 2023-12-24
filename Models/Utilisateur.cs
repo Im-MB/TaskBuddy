@@ -20,7 +20,7 @@ namespace TaskBuddy.Models
 
         public string? Ville { get; set; }
 
-        public string? MyScore { get; set; }
+        public int? MyScore { get; set; }
 
         public byte[]? Profil { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Framework;
 using System.Security.Cryptography.Xml;
 using TaskBuddy.Data;
 using TaskBuddy.Models;
@@ -27,6 +28,9 @@ namespace TaskBuddy.Controllers
 
             var userTasks = _dbContext.Tasks.Where(task => task.UserId == currentUser.Id).ToList();
 
+            if (userTasks.Count == 0) currentUser.MyScore = 0;
+            await _userManager.UpdateAsync(currentUser);
+
             return View(userTasks);
         }
 
@@ -43,8 +47,9 @@ namespace TaskBuddy.Controllers
             {
                 tache.UserId = userId;
                 tache.Etat = "in progress";
-                tache.Priority = "High";
-                tache.Reward = 0;
+                if (tache.Priority == "High") tache.Reward = 3;
+               else if (tache.Priority == "Medium") tache.Reward = 2;
+               else if (tache.Priority == "Low") tache.Reward = 1;
                 tache.DateD = DateTime.Now;
                 _dbContext.Tasks.Add(tache);
                 _dbContext.SaveChanges();
@@ -61,11 +66,17 @@ namespace TaskBuddy.Controllers
         
         [HttpGet]
         [HttpPost]
-        public IActionResult DeleteTache(int id)
-        {
+        public async Task<IActionResult> DeleteTache(int id)
+        {   var user= await _userManager.GetUserAsync(User);
             var tache = _dbContext.Tasks.SingleOrDefault(t => t.IdTask == id);
-            _dbContext.Tasks.Remove(tache);
-            _dbContext.SaveChanges();
+            if (tache != null && user != null)
+            {
+                _dbContext.Tasks.Remove(tache);
+                 user.MyScore -= tache.Reward;
+                _dbContext.SaveChanges();
+                await _userManager.UpdateAsync(user);
+
+            }
             return RedirectToAction(nameof(ListeTaches));
         }
        
@@ -93,14 +104,17 @@ namespace TaskBuddy.Controllers
 
         [HttpPost]
         [Route("Tache/UpdateStatus/{id}")]
-        public IActionResult UpdateTaskStatus(int id)
-        {
+        public async Task<IActionResult> UpdateTaskStatus(int id)
+        { var user = await _userManager.GetUserAsync(User);
             var task = _dbContext.Tasks.Find(id);
 
-            if (task != null)
+            if (task != null && user != null)
             {
                 task.Etat = task.Etat == "in progress" ? "done" : "in progress";
                 _dbContext.Update(task);
+                if (task.Etat=="done") user.MyScore += task.Reward;
+                else if (task.Etat=="in progress" && user.MyScore!=0) user.MyScore -= task.Reward;
+                await _userManager.UpdateAsync(user);
                 _dbContext.SaveChanges();
                 return Ok();
             }

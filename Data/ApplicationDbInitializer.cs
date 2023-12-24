@@ -35,7 +35,7 @@ namespace TaskBuddy.Data
                     if (createAdmin.Succeeded)
                     {
                         adminUser.Nom = "Admin";
-                        adminUser.MyScore = "0";
+                        adminUser.MyScore = 0;
                         adminUser.Prenom = "Admin";
                         adminUser.Ville = "_______";
                         adminUser.Adresse = "_______";

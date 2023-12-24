@@ -18,7 +18,7 @@ namespace TaskBuddy.Models
         public DateTime DateF { get; set; }
         [Required]
         public string? Note { get; set; }
-        [Required]
+
         public int? Reward { get; set; }
 
         [Required]

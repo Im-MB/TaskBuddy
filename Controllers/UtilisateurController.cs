@@ -90,8 +90,12 @@ namespace TaskBuddy.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> UserDetails(string id)
+        {  var user= await userManager.FindByIdAsync(id);
 
-       
+            return View(user);
+        }       
 
         [HttpGet]
         public async Task<IActionResult> EditUtilisateur(string id)
