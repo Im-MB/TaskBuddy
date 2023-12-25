@@ -26,9 +26,13 @@ namespace TaskBuddy.Models
 
         public ICollection<Tache> Taches { get; set; }
 
+        public ICollection<Ami> Amis { get; set; }
+
+        public ICollection<Invitation> Invitations { get; set; }
+
         //---------------------------------
 
-        
+
 
     }
 }

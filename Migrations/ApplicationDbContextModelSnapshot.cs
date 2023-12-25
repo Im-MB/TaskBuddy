@@ -3,20 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskBuddy.Data;
 
 #nullable disable
 
-namespace TaskBuddy.Data.Migrations
+namespace TaskBuddy.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231224145035_migration008")]
-    partial class migration008
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -162,6 +159,21 @@ namespace TaskBuddy.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("TaskBuddy.Models.Ami", b =>
+                {
+                    b.Property<string>("AmiId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UtilisateurId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("AmiId");
+
+                    b.HasIndex("UtilisateurId");
+
+                    b.ToTable("Amis", (string)null);
+                });
+
             modelBuilder.Entity("TaskBuddy.Models.Chat", b =>
                 {
                     b.Property<int>("Id")
@@ -178,7 +190,36 @@ namespace TaskBuddy.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Chats");
+                    b.ToTable("Chats", (string)null);
+                });
+
+            modelBuilder.Entity("TaskBuddy.Models.Invitation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DestinataireId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ExpediteurId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsAccepted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeclined")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DestinataireId");
+
+                    b.HasIndex("ExpediteurId");
+
+                    b.ToTable("Invitations", (string)null);
                 });
 
             modelBuilder.Entity("TaskBuddy.Models.Message", b =>
@@ -203,7 +244,7 @@ namespace TaskBuddy.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Messages", (string)null);
                 });
 
             modelBuilder.Entity("TaskBuddy.Models.Notification", b =>
@@ -219,7 +260,7 @@ namespace TaskBuddy.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("Notifications", (string)null);
                 });
 
             modelBuilder.Entity("TaskBuddy.Models.Tache", b =>
@@ -256,13 +297,14 @@ namespace TaskBuddy.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("IdTask");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("Tasks", (string)null);
                 });
 
             modelBuilder.Entity("TaskBuddy.Models.Utilisateur", b =>
@@ -405,17 +447,49 @@ namespace TaskBuddy.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TaskBuddy.Models.Ami", b =>
+                {
+                    b.HasOne("TaskBuddy.Models.Utilisateur", "AmiUtilisateur")
+                        .WithMany("Amis")
+                        .HasForeignKey("UtilisateurId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("AmiUtilisateur");
+                });
+
+            modelBuilder.Entity("TaskBuddy.Models.Invitation", b =>
+                {
+                    b.HasOne("TaskBuddy.Models.Utilisateur", "Destinataire")
+                        .WithMany("Invitations")
+                        .HasForeignKey("DestinataireId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TaskBuddy.Models.Utilisateur", "Expediteur")
+                        .WithMany()
+                        .HasForeignKey("ExpediteurId");
+
+                    b.Navigation("Destinataire");
+
+                    b.Navigation("Expediteur");
+                });
+
             modelBuilder.Entity("TaskBuddy.Models.Tache", b =>
                 {
                     b.HasOne("TaskBuddy.Models.Utilisateur", "Utilisateur")
                         .WithMany("Taches")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Utilisateur");
                 });
 
             modelBuilder.Entity("TaskBuddy.Models.Utilisateur", b =>
                 {
+                    b.Navigation("Amis");
+
+                    b.Navigation("Invitations");
+
                     b.Navigation("Taches");
                 });
 #pragma warning restore 612, 618

@@ -27,7 +27,6 @@ namespace TaskBuddy.Data
                     {
                         UserName = adminEmail,
                         Email = adminEmail,
-                        Ville = "____"
                     };
 
                     var createAdmin = await userManager.CreateAsync(adminUser, "Admin_001");

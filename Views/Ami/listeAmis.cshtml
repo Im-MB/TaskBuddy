@@ -1,0 +1,65 @@
+﻿@model List<Ami>
+
+
+
+@if (Model.Count == 0)
+{
+    <div class="listeAmi row" style="height:100vh;">
+        <div class="col-6">
+            <h1 style="color: #3A3882;
+                font-family: Poppins;
+                font-size: 55px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 52px;    
+                margin-top: 140px;
+                text-align: center;
+                margin-bottom: 64px;">
+                You don't have any friends yet.
+            </h1>
+            <p style="color: #494949;
+                font-family: Poppins;
+                font-size: 36px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 52px;text-align: center;">
+                Want to make new friends? <a class="nav-link " asp-area="" asp-controller="Utilisateur" asp-action="search" style="color: #7D4FFE; font-weight:600;">Click here</a> to get started!
+            </p>
+        </div>
+        <div class="col-6">
+            <img src="~/assests/noInvitation.png" />
+        </div>
+
+    </div>
+
+
+}
+else
+{
+    <div class="listeAmi" style="height:90vh;">
+        @using (Html.BeginForm("search", "Utilisateur", FormMethod.Get, new { @class = "user_header" }))
+        {
+            <div class="dash_search_container">
+                @Html.TextBox("nameSearch", null, new { @class = "dash_input", placeholder = "Search..." })
+                <button class="dash_icon" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        }
+        <h2 style="color: #7D4FFE;
+                font-family: Poppins;
+                font-size: 27px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;">
+            My Friends
+        </h2>
+        <div class="listeUserContainer" style="border-radius: 25px;background: #FFF;height:90%;padding-left:25px;padding-top:50px;">
+            
+                @foreach (var ami in Model)
+                {
+                    <div>
+                        <div style="font-size:30px;">@ami.AmiUtilisateur.UserName </div>
+                    </div>
+                }
+        </div>
+    </div>
+}

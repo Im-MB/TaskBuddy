@@ -89,7 +89,12 @@ namespace TaskBuddy.Controllers
             }
         }
 
+        [HttpGet]
 
+        public IActionResult search(string nameSearch)
+        {
+            return View(userManager.Users.Where(x => x.UserName.Contains(nameSearch) || nameSearch == null).ToList());
+        }
         [HttpGet]
         public async Task<IActionResult> UserDetails(string id)
         {  var user= await userManager.FindByIdAsync(id);

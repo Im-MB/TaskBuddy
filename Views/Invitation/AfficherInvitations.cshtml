@@ -1,0 +1,93 @@
+﻿@model List<Invitation>
+
+
+@if (Model.Count == 0)
+{
+    <div class="listeAmi row" style="height:100vh;">
+        <div class="col-6">
+            <h1 style="color: #3A3882;
+                font-family: Poppins;
+                font-size: 55px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 52px;
+                margin-top: 140px;
+                text-align: center;
+                margin-bottom: 64px;">
+                You don't have any invitations yet.
+            </h1>
+            <p style="color: #494949;
+                font-family: Poppins;
+                font-size: 36px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 52px;text-align: center;">
+                Want to make new friends? <a class="nav-link " asp-area="" asp-controller="Utilisateur" asp-action="search" style="color: #7D4FFE; font-weight:600;">Click here</a> to get started!
+            </p>
+        </div>
+        <div class="col-6">
+            <img src="~/assests/noInvitation.png" />
+        </div>
+
+    </div>
+}
+else
+{
+    <div class="listeAmi row" style="height:100vh;">
+        @using (Html.BeginForm("search", "Utilisateur", FormMethod.Get, new { @class = "user_header" }))
+        {
+            <div class="dash_search_container">
+                @Html.TextBox("nameSearch", null, new { @class = "dash_input", placeholder = "Search..." })
+                <button class="dash_icon" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        }
+
+        <div class="listeUserContainer" style="border-radius: 25px;background: #FFF;height:90%;padding-left:25px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="border-bottom:none;padding-bottom: 20px;">Expéditeur</th>
+                        <th style="border-bottom:none;padding-bottom: 20px;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var invitation in Model)
+                    {
+                        <tr>
+                            <td class="td_tache" style="border-bottom:none;">@invitation.Expediteur.UserName</td>
+                            <td class="td_tache" style="border-bottom:none;">
+                                @if (!invitation.IsAccepted)
+                                {
+                                    <a class="btn" style="color: #7D4FFE;text-align: center;font-family: Poppins;font-size: 16px;font-style: normal;font-weight: 600;line-height: normal;text-decoration: none;
+    padding: 0 10px;" onclick="acceptInvitation(@invitation.Id)">Accepter</a>
+                                }
+                                else
+                                {
+                                    <span class="text-success">Acceptée</span>
+                                }
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        function acceptInvitation(invitationId) {
+            $.ajax({
+                type: "POST",
+                url: "/Invitation/AccepterInvitation",
+                data: { invitationId: invitationId },
+                success: function () {
+                    // Rafraîchissez la liste des invitations après l'acceptation
+                    window.location.reload();
+                },
+                error: function (error) {
+                    alert("Erreur lors de l'acceptation de l'invitation.");
+                }
+            });
+        }
+    </script>
+}
+

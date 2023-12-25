@@ -17,10 +17,10 @@ namespace TaskBuddy.Data.Migrations
                 type: "nvarchar(max)",
                 nullable: true);
 
-            migrationBuilder.AddColumn<string>(
+            migrationBuilder.AddColumn<int>(
                 name: "MyScore",
                 table: "AspNetUsers",
-                type: "nvarchar(max)",
+                type: "int",
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
@@ -30,15 +30,15 @@ namespace TaskBuddy.Data.Migrations
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
-                name: "PhotoUrl",
+                name: "Prenom",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
                 nullable: true);
 
-            migrationBuilder.AddColumn<string>(
-                name: "Prenom",
+            migrationBuilder.AddColumn<byte[]>(
+                name: "Profil",
                 table: "AspNetUsers",
-                type: "nvarchar(max)",
+                type: "varbinary(max)",
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
@@ -60,6 +60,23 @@ namespace TaskBuddy.Data.Migrations
                 nullable: true);
 
             migrationBuilder.CreateTable(
+                name: "Amis",
+                columns: table => new
+                {
+                    AmiId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UtilisateurId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Amis", x => x.AmiId);
+                    table.ForeignKey(
+                        name: "FK_Amis_AspNetUsers_UtilisateurId",
+                        column: x => x.UtilisateurId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Chats",
                 columns: table => new
                 {
@@ -71,6 +88,32 @@ namespace TaskBuddy.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Chats", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Invitations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ExpediteurId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    DestinataireId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    IsAccepted = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeclined = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Invitations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Invitations_AspNetUsers_DestinataireId",
+                        column: x => x.DestinataireId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Invitations_AspNetUsers_ExpediteurId",
+                        column: x => x.ExpediteurId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -112,19 +155,53 @@ namespace TaskBuddy.Data.Migrations
                     Etat = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateD = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateF = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Reward = table.Column<int>(type: "int", nullable: true),
+                    Priority = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tasks", x => x.IdTask);
+                    table.ForeignKey(
+                        name: "FK_Tasks_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Amis_UtilisateurId",
+                table: "Amis",
+                column: "UtilisateurId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Invitations_DestinataireId",
+                table: "Invitations",
+                column: "DestinataireId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Invitations_ExpediteurId",
+                table: "Invitations",
+                column: "ExpediteurId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tasks_UserId",
+                table: "Tasks",
+                column: "UserId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Amis");
+
+            migrationBuilder.DropTable(
                 name: "Chats");
+
+            migrationBuilder.DropTable(
+                name: "Invitations");
 
             migrationBuilder.DropTable(
                 name: "Messages");
@@ -148,11 +225,11 @@ namespace TaskBuddy.Data.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "PhotoUrl",
+                name: "Prenom",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "Prenom",
+                name: "Profil",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(

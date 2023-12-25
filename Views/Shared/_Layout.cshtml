@@ -42,11 +42,11 @@
     {
         <!--Left SideBar-->
         <div  class="leftsidenav">
-            <a asp-area="" asp-controller="Home" asp-action="Dashboard"><i class="fa-solid fa-users-viewfinder sideBar_logo"></i></a>
-            <a href="#"><i class="fa-solid fa-bell"></i></a>
-            <a href="#"><i class="fa-solid fa-user-clock"></i></a><!--Invi env-->
-            <a href="#"><i class="fa-solid fa-user-check"></i></a><!-- Invi recu -->
-            <a href="#"><i class="fa-solid fa-user-tie"></i></a>
+            <a asp-area="" asp-controller="Home" asp-action="Dashboard"><i class="fa-brands fa-flipboard sideBar_logo"></i></a>
+            <!-- search --><a class="nav-link text-dark" asp-area="" asp-controller="Utilisateur" asp-action="search"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Ami" asp-action="listeAmis"><i class="fa-solid fa-user-tie"></i></a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Invitation" asp-action="InvitationEnvoye"><i class="fa-solid fa-user-clock"></i></a><!--Invi env-->
+            <a class="nav-link text-dark" asp-area="" asp-controller="Invitation" asp-action="AfficherInvitations"><i class="fa-solid fa-user-check"></i></a><!-- Invi recu -->
             <a href="#"><i class="fa-solid fa-share"></i></a>
             @if (UserManager.GetUserAsync(User).Result.Role == "admin")
             {

@@ -12,8 +12,8 @@ using TaskBuddy.Data;
 namespace TaskBuddy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231223123933_migration007")]
-    partial class migration007
+    [Migration("20231224164404_migration001")]
+    partial class migration001
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -162,6 +162,21 @@ namespace TaskBuddy.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("TaskBuddy.Models.Ami", b =>
+                {
+                    b.Property<string>("AmiId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UtilisateurId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("AmiId");
+
+                    b.HasIndex("UtilisateurId");
+
+                    b.ToTable("Amis");
+                });
+
             modelBuilder.Entity("TaskBuddy.Models.Chat", b =>
                 {
                     b.Property<int>("Id")
@@ -179,6 +194,35 @@ namespace TaskBuddy.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Chats");
+                });
+
+            modelBuilder.Entity("TaskBuddy.Models.Invitation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DestinataireId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ExpediteurId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsAccepted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeclined")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DestinataireId");
+
+                    b.HasIndex("ExpediteurId");
+
+                    b.ToTable("Invitations");
                 });
 
             modelBuilder.Entity("TaskBuddy.Models.Message", b =>
@@ -253,7 +297,6 @@ namespace TaskBuddy.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Reward")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -294,8 +337,8 @@ namespace TaskBuddy.Data.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("MyScore")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("MyScore")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nom")
                         .HasColumnType("nvarchar(max)");
@@ -404,6 +447,30 @@ namespace TaskBuddy.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TaskBuddy.Models.Ami", b =>
+                {
+                    b.HasOne("TaskBuddy.Models.Utilisateur", "AmiUtilisateur")
+                        .WithMany()
+                        .HasForeignKey("UtilisateurId");
+
+                    b.Navigation("AmiUtilisateur");
+                });
+
+            modelBuilder.Entity("TaskBuddy.Models.Invitation", b =>
+                {
+                    b.HasOne("TaskBuddy.Models.Utilisateur", "Destinataire")
+                        .WithMany()
+                        .HasForeignKey("DestinataireId");
+
+                    b.HasOne("TaskBuddy.Models.Utilisateur", "Expediteur")
+                        .WithMany()
+                        .HasForeignKey("ExpediteurId");
+
+                    b.Navigation("Destinataire");
+
+                    b.Navigation("Expediteur");
                 });
 
             modelBuilder.Entity("TaskBuddy.Models.Tache", b =>

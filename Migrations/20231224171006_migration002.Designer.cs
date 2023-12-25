@@ -12,8 +12,8 @@ using TaskBuddy.Data;
 namespace TaskBuddy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231209175056_migration001")]
-    partial class migration001
+    [Migration("20231224171006_migration002")]
+    partial class migration002
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -162,6 +162,21 @@ namespace TaskBuddy.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("TaskBuddy.Models.Ami", b =>
+                {
+                    b.Property<string>("AmiId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UtilisateurId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("AmiId");
+
+                    b.HasIndex("UtilisateurId");
+
+                    b.ToTable("Amis");
+                });
+
             modelBuilder.Entity("TaskBuddy.Models.Chat", b =>
                 {
                     b.Property<int>("Id")
@@ -179,6 +194,35 @@ namespace TaskBuddy.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Chats");
+                });
+
+            modelBuilder.Entity("TaskBuddy.Models.Invitation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DestinataireId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ExpediteurId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsAccepted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeclined")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DestinataireId");
+
+                    b.HasIndex("ExpediteurId");
+
+                    b.ToTable("Invitations");
                 });
 
             modelBuilder.Entity("TaskBuddy.Models.Message", b =>
@@ -248,7 +292,20 @@ namespace TaskBuddy.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Priority")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Reward")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("IdTask");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Tasks");
                 });
@@ -281,8 +338,8 @@ namespace TaskBuddy.Data.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("MyScore")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("MyScore")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nom")
                         .HasColumnType("nvarchar(max)");
@@ -304,11 +361,11 @@ namespace TaskBuddy.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("PhotoUrl")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Prenom")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Profil")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
@@ -391,6 +448,46 @@ namespace TaskBuddy.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TaskBuddy.Models.Ami", b =>
+                {
+                    b.HasOne("TaskBuddy.Models.Utilisateur", "AmiUtilisateur")
+                        .WithMany()
+                        .HasForeignKey("UtilisateurId");
+
+                    b.Navigation("AmiUtilisateur");
+                });
+
+            modelBuilder.Entity("TaskBuddy.Models.Invitation", b =>
+                {
+                    b.HasOne("TaskBuddy.Models.Utilisateur", "Destinataire")
+                        .WithMany()
+                        .HasForeignKey("DestinataireId");
+
+                    b.HasOne("TaskBuddy.Models.Utilisateur", "Expediteur")
+                        .WithMany()
+                        .HasForeignKey("ExpediteurId");
+
+                    b.Navigation("Destinataire");
+
+                    b.Navigation("Expediteur");
+                });
+
+            modelBuilder.Entity("TaskBuddy.Models.Tache", b =>
+                {
+                    b.HasOne("TaskBuddy.Models.Utilisateur", "Utilisateur")
+                        .WithMany("Taches")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Utilisateur");
+                });
+
+            modelBuilder.Entity("TaskBuddy.Models.Utilisateur", b =>
+                {
+                    b.Navigation("Taches");
                 });
 #pragma warning restore 612, 618
         }

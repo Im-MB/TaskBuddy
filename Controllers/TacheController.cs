@@ -19,17 +19,19 @@ namespace TaskBuddy.Controllers
             _dbContext = dbContext;
             _userManager = userManager;
         }
+        [HttpGet]
 
-       
+        public IActionResult search(string nameSearch)
+        {
+            return View(_dbContext.Tasks.Where(x => x.Nom.Contains(nameSearch) || nameSearch == null).ToList());
+        }
+
         [HttpGet]
         public async Task<IActionResult> ListeTaches()
         {
             var currentUser = await _userManager.GetUserAsync(User);
 
             var userTasks = _dbContext.Tasks.Where(task => task.UserId == currentUser.Id).ToList();
-
-            if (userTasks.Count == 0) currentUser.MyScore = 0;
-            await _userManager.UpdateAsync(currentUser);
 
             return View(userTasks);
         }
@@ -66,15 +68,13 @@ namespace TaskBuddy.Controllers
         
         [HttpGet]
         [HttpPost]
-        public async Task<IActionResult> DeleteTache(int id)
-        {   var user= await _userManager.GetUserAsync(User);
+        public IActionResult DeleteTache(int id)
+        {   
             var tache = _dbContext.Tasks.SingleOrDefault(t => t.IdTask == id);
-            if (tache != null && user != null)
+            if (tache != null)
             {
                 _dbContext.Tasks.Remove(tache);
-                 user.MyScore -= tache.Reward;
                 _dbContext.SaveChanges();
-                await _userManager.UpdateAsync(user);
 
             }
             return RedirectToAction(nameof(ListeTaches));
@@ -93,7 +93,6 @@ namespace TaskBuddy.Controllers
             if(oldTache != null) { 
             
             oldTache.Nom=newTache.Nom;
-            oldTache.Etat = newTache.Etat;
             oldTache.DateD = newTache.DateD;
             oldTache.DateF=newTache.DateF;
             oldTache.Note = newTache.Note;

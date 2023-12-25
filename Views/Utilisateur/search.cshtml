@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Utilisateur>
+
+
+    <div class="fr_search" style="height:100vh;">
+           
+
+        @using (Html.BeginForm("search", "Utilisateur", FormMethod.Get, new { @class = "user_header" }))
+        {
+            <div class="dash_search_container">
+                @Html.TextBox("nameSearch", null, new { @class = "dash_input", placeholder = "Search..." })
+                <button class="dash_icon" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        }
+
+
+
+    <div class="listeUserContainer" style="border-radius: 25px;background: #FFF;height:90%;padding-left:25px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="border-bottom:none;padding-bottom: 20px;">Name </th>
+                        <th style="border-bottom:none;padding-bottom: 20px;">Email </th>
+                        <th style="border-bottom:none;padding-bottom: 20px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() == 0)
+                    {
+                        <tr>
+                            <td class="td_tache">
+                                No
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                            <td class="td_tache" style="border-bottom:none;">@item.UserName</td>
+                            <td class="td_tache" style="border-bottom:none;">@item.Email</td>
+                                <td class="td_tache" style="border-bottom:none;">
+                                <a class="btn-add" data-id="@item.Id" style="color: rgba(252, 164, 101, 0.88);;text-align: center;font-family: Poppins;font-size: 16px;font-style: normal;font-weight: 600;line-height: normal;text-decoration: none;
+    padding: 0 10px;cursor:pointer;">Add</a> <!-- Utilisez data-id ici -->
+                                    </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(".btn-add").on("click", function () {
+            var Id = $(this).data("id"); // Utilisez data-id ici
+            console.log("ID du destinataire:", Id);
+            if (Id) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Invitation/invitations",
+                    data: { Id: Id },
+                    success: function (response) {
+                        alert("Invitation envoyée avec succès!");
+                    },
+                    error: function (error) {
+                        alert("Erreur lors de l'envoi de l'invitation.");
+                    }
+                });
+            } else {
+                alert("ID du destinataire non valide.");
+            }
+        });
+    });
+</script>

@@ -921,7 +921,7 @@ margin:100px 0;
 /*- DashBoard -End- -*/
 
 /*- Liste Tache -Start- -*/
-.listeTache, .listeUser, .task_creation_container, .settings_container {
+.listeTache, .listeUser, .task_creation_container, .settings_container, .fr_search, .listeAmi {
     margin-left: 90px;
     background: #F8F9FF;
     padding: 59px 500px 27px 85px;
