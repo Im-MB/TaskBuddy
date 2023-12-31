@@ -14,18 +14,21 @@
                 <input class="dash_input" type="text" placeholder="Search...">
                 <button class="dash_icon" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
+            <div class="btn dash_button2">
+                <i class="fa-solid fa-plus"></i>
+                <script src="~/lib/jquery/dist/jquery.min.js"></script>
+                <button id="btnPdf" class="btn" style="text-decoration:none;color:#fff;">Generate PDF</button>
+            </div>
     </div>
 
 
    <div class="listeUserContainer" style="border-radius: 25px;background: #FFF;height:90%;padding-left:25px;">
 
-
-        <table class="table">
+            
+            <table class="table" id="pdfContainer">
             <thead>
                 <tr>
-                        <th style="border-bottom:none;padding-bottom: 20px;">
-                            @Html.DisplayNameFor(model => model.Profil)
-                        </th>
+                        
                         <th style="border-bottom:none;padding-bottom: 20px;">
                         @Html.DisplayNameFor(model => model.UserName)
                     </th>
@@ -55,17 +58,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                            <td class="td_tache" style="border-bottom:none;">
-                                @if (UserManager.GetUserAsync(User).Result.Profil is not null)
-                                {
-                                    <img class="rounded-circle" alt="Profil" width="40" height="40" src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.Profil))" />
-
-                                }
-                                else
-                                {
-                                    <img id="Profil" class="rounded-circle" alt="Profil" width="40" height="40" src="~/uploads/avatar-male.jpg" />
-                                }
-                            </td>
+                            
                             <td class="td_tache" style="border-bottom:none;">
                             @Html.DisplayFor(modelItem => item.UserName)
                         </td>
@@ -106,6 +99,22 @@
         </table>
    </div>
 </div>
+
+    @*pour la generation de pdf *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript">
+        const buttonToPdf = document.querySelector("#btnPdf");
+
+        buttonToPdf.addEventListener("click", () => {
+            const element = document.querySelector('#pdfContainer');
+
+            html2pdf(element, { filename: 'Liste_Users.pdf', });
+
+
+        })
+
+    </script>
 }
 else
 {

@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskBuddy.Data;
 
 #nullable disable
 
-namespace TaskBuddy.Migrations
+namespace TaskBuddy.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231225021648_migration005")]
+    partial class migration005
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -312,34 +315,6 @@ namespace TaskBuddy.Migrations
                     b.ToTable("Tasks");
                 });
 
-            modelBuilder.Entity("TaskBuddy.Models.TachePartagee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("DestinataireId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ExpediteurId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("TacheId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DestinataireId");
-
-                    b.HasIndex("ExpediteurId");
-
-                    b.HasIndex("TacheId");
-
-                    b.ToTable("TachesPartagees");
-                });
-
             modelBuilder.Entity("TaskBuddy.Models.Utilisateur", b =>
                 {
                     b.Property<string>("Id")
@@ -519,29 +494,6 @@ namespace TaskBuddy.Migrations
                         .IsRequired();
 
                     b.Navigation("Utilisateur");
-                });
-
-            modelBuilder.Entity("TaskBuddy.Models.TachePartagee", b =>
-                {
-                    b.HasOne("TaskBuddy.Models.Utilisateur", "Destinataire")
-                        .WithMany()
-                        .HasForeignKey("DestinataireId");
-
-                    b.HasOne("TaskBuddy.Models.Utilisateur", "Expediteur")
-                        .WithMany()
-                        .HasForeignKey("ExpediteurId");
-
-                    b.HasOne("TaskBuddy.Models.Tache", "Tache")
-                        .WithMany()
-                        .HasForeignKey("TacheId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Destinataire");
-
-                    b.Navigation("Expediteur");
-
-                    b.Navigation("Tache");
                 });
 
             modelBuilder.Entity("TaskBuddy.Models.Utilisateur", b =>

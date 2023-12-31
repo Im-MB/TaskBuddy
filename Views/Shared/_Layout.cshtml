@@ -47,7 +47,8 @@
             <a class="nav-link text-dark" asp-area="" asp-controller="Ami" asp-action="listeAmis"><i class="fa-solid fa-user-tie"></i></a>
             <a class="nav-link text-dark" asp-area="" asp-controller="Invitation" asp-action="InvitationEnvoye"><i class="fa-solid fa-user-clock"></i></a><!--Invi env-->
             <a class="nav-link text-dark" asp-area="" asp-controller="Invitation" asp-action="AfficherInvitations"><i class="fa-solid fa-user-check"></i></a><!-- Invi recu -->
-            <a href="#"><i class="fa-solid fa-share"></i></a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Tache" asp-action="PartagerTache"><i class="fa-solid fa-share"></i></a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="TachePartagee" asp-action="listeAmis"><i class="fa-solid fa-users"></i></a><!-- Invi recu -->
             @if (UserManager.GetUserAsync(User).Result.Role == "admin")
             {
                 <a class="nav-link text-dark" asp-area="" asp-controller="Utilisateur" asp-action="ListeUtilisateur"><i class="fa-solid fa-users-gear"></i></a>

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<TachePartagee>
+
+@{
+    ViewData["Title"] = "listeAmis";
+}
+
+<div class="listeTache" style="height:100vh;">
+
+    <div class="task_header">
+        <div class="dash_search_container">
+            <input class="dash_input" type="text" placeholder="Search...">
+            <button class="dash_icon" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+    </div>
+    
+    <div class="listeTacheContainer" style="border-radius: 25px;background: #FFF;height:90%;padding-left:25px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="border-bottom:none;padding-bottom: 20px;width: 33%;">
+                        Tache Title
+                    </th>
+                    <th style="border-bottom:none;padding-bottom: 20px;width: 33%;">
+                        Sender
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="td_tache" style="border-bottom:none;width: 33%;">
+                            @Html.DisplayFor(modelItem => item.Tache.Nom)
+                        </td>
+                        
+                        <td class="td_tache" style="border-bottom:none;width: 33%;">
+                            @Html.DisplayFor(modelItem => item.Expediteur.Email)
+                        </td>
+                        
+                        
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

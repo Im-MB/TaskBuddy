@@ -1,0 +1,92 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<Utilisateur> UserManager
+@model IEnumerable<TaskBuddy.Models.Tache>
+
+@{
+    ViewData["Title"] = "ListeTaches";
+}
+<div class="listeTache" style="height:100vh;">
+    <div class="task_header">
+        <div class="dash_search_container">
+            <input class="dash_input" type="text" placeholder="Search...">
+            <button class="dash_icon" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <div class="btn dash_button2">
+            <i class="fa-solid fa-plus"></i>
+            <a asp-action="CreateTache" style="text-decoration:none;color:#fff;">Create New Task</a>
+        </div>
+    </div>
+
+
+    <div class="listeTacheContainer" style="border-radius: 25px;background: #FFF;height:90%;padding-left:25px;">
+
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="border-bottom:none;">
+
+                    </th>
+                    <th style="border-bottom:none;padding-bottom: 20px;width: 33%;">
+                        Task Title
+                    </th>
+                    <th style="border-bottom:none;padding-bottom: 20px;">
+                        Status
+                    </th>
+                    <th style="border-bottom:none;padding-bottom: 20px;">
+                        Due Date
+                    </th>
+                    <th style="border-bottom:none;padding-bottom: 20px;">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="border-bottom:none;" class="custom-checkbox">
+                            
+                        </td>
+                        <td class="td_tache" style="border-bottom:none;width: 33%;">
+                            @Html.DisplayFor(modelItem => item.Nom)
+                        </td>
+                        <td class="td_tache" style="border-bottom:none;">
+                            @Html.DisplayFor(modelItem => item.Etat)
+                        </td>
+                        <td class="td_tache" style="border-bottom:none;">
+                            @Html.DisplayFor(modelItem => item.DateF)
+                        </td>
+                        <td style="border-bottom:none;">
+
+                            <button class="btn" style="color: #7D4FFE;text-align: center;font-family: Poppins;font-size: 16px;font-style: normal;font-weight: 600;line-height: normal;" onclick="shareTask('@item.IdTask')">Share</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    function shareTask(tacheId) {
+        var confirmation = confirm("Voulez-vous partager cette tâche avec tous vos amis ?");
+        if (confirmation) {
+            // Faites une requête AJAX pour partager la tâche
+            $.ajax({
+                type: "POST",
+                url: "/Tache/PartagerTache", // Assurez-vous que l'URL est correcte
+                data: { tacheId: tacheId },
+                success: function (response) {
+                    alert("Tâche partagée avec succès !");
+                    // Vous pouvez ajouter d'autres logiques après le partage
+                },
+                error: function (error) {
+                    alert("Erreur lors du partage de la tâche.");
+                }
+            });
+        }
+    }
+</script>

@@ -32,6 +32,8 @@
                 <div style="position:absolute;top: 20px;left: 20px;">
                     <a asp-action="ListeUtilisateur"><i class="fa-solid fa-angles-left" style="font-size:35px;color:#7D4FFE;"></i></a>
                 </div>
+
+                <!--
                 @if (UserManager.GetUserAsync(User).Result.Profil is not null)
                 {
                     <div class="nav-item" style="margin-left: 50px;margin-bottom:25px;text-align: center;">
@@ -97,7 +99,7 @@
                         </div>
                     </div>
                 </div>
-
+                -->
                 <form asp-action="EditUtilisateur">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Id" />

@@ -1,0 +1,46 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+}
+<div style="height:100vh;">
+@{
+    if (@Model.DisplayConfirmAccountLink)
+    {
+
+
+            <div class="col-12" style="text-align:center;">
+                <h1 style="color: #3A3882;
+                    font-family: Poppins;
+                    font-size: 55px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 52px;
+                    text-align: center;
+                    margin-bottom: 64px;">
+                    Your Email Is not confirmed yet.
+                </h1>
+                <p style="color: #494949;
+                    font-family: Poppins;
+                    font-size: 36px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 52px;text-align: center;">
+                    To confirm your account
+                    <a id="confirm-link" href="@Model.EmailConfirmationUrl" style="color: #7D4FFE; font-weight:600;">Click here</a>
+                    to get started!
+                </p>
+            </div>
+
+
+
+    }
+    else
+    {
+<p>
+        Please check your email to confirm your account.
+</p>
+    }
+}
+
+</div>

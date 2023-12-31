@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Framework;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography.Xml;
 using TaskBuddy.Data;
 using TaskBuddy.Models;
@@ -119,6 +120,51 @@ namespace TaskBuddy.Controllers
             }
 
             return NotFound();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> PartagerTache()
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            // Retrieve tasks associated with the current user
+            var userTasks = _dbContext.Tasks.Where(task => task.UserId == currentUser.Id).ToList();
+
+            return View(userTasks);
+        }
+
+        [HttpPost]
+
+
+        public IActionResult PartagerTache(int tacheId)
+        {
+            var userId = _userManager.GetUserId(User);
+
+            // Récupérez la tâche que vous partagez
+            var tache = _dbContext.Tasks.Find(tacheId);
+
+            // Récupérez la liste des amis de l'utilisateur
+            var amis = _dbContext.Amis.Where(a => a.UtilisateurId == userId).ToList();
+
+            // Partagez la tâche avec chaque ami
+            foreach (var ami in amis)
+            {
+                var tachePartagee = new TachePartagee
+                {
+                    TacheId = tacheId,
+                    Tache = tache,
+                    ExpediteurId = userId,
+                    Expediteur = tache.Utilisateur, // Utilisateur qui partage la tâche
+                    DestinataireId = ami.AmiId,
+                    Destinataire = ami.AmiUtilisateur // Utilisateur destinataire
+                };
+
+                _dbContext.TachesPartagees.Add(tachePartagee);
+            }
+
+            _dbContext.SaveChanges();
+
+            return Json(new { success = true });
         }
 
 

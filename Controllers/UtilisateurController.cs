@@ -121,6 +121,7 @@ namespace TaskBuddy.Controllers
 
                 var result = await userManager.UpdateAsync(oldUser);
 
+                /*
                 if (result.Succeeded)
                 {
                     await _signInManager.RefreshSignInAsync(oldUser);
@@ -132,6 +133,7 @@ namespace TaskBuddy.Controllers
                     return RedirectToAction(nameof(ListeUtilisateur));
 
                 }
+                */
             }
             return RedirectToAction(nameof(ListeUtilisateur));
         }

@@ -1,12 +1,17 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿
+@using Microsoft.AspNetCore.Identity
 @inject SignInManager<Utilisateur> SignInManager
 @inject UserManager<Utilisateur> UserManager
 
 @{
-    ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = "Dashboard"; 
+    var user = await UserManager.GetUserAsync(User);
+    int score = user?.MyScore ?? 0;
+    string widthValue = score.ToString() + "%";
+
 }
 
-<section class="dashboard">
+<section class="dashboard" style="height:100vh;">
     <div class="dash_head d-flex justify-content-between">
         <div class="dash_search_container">
             <input class="dash_input" type="text" placeholder="Search...">
@@ -28,40 +33,225 @@
         </div>
     </div>
     <div class="dashboard_footer row d-flex justify-content-between " style="padding-right:0;">
-        <div class="charts col-8">
-            <div class="task_completed">
-
+        <div class="charts col-8 d-flex justify-content-around">
+            <div class="task_completed" style="background: #FFF;
+                border-radius: 37px;
+                text-align: center;width:30%;">
+                <h3 style="    color: #3A3882;
+                font-family: Poppins;
+                font-size: 25px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                margin: 23px 0;">
+                    Tasks Done
+                </h3>
+                <div class="task_completed" style="display: flex;height: 148px;justify-content: center;">
+                    <canvas id="tasksDoneChart" style="    width: 110px;height: 110px;"></canvas>
+                </div>
+                <div id="tasksDoneCount">
+                    <p>Loading tasks done count...</p>
+                </div>
             </div>
-            <div class="task_completed2">
-
+            <div class="task_completed2" style="background: #FFF;
+                border-radius: 37px;
+                text-align: center;width:30%;">
+                <h3 style="    color: #3A3882;
+                    font-family: Poppins;
+                    font-size: 25px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                    margin: 23px 0;">
+                    Tasks In Progress
+                </h3>
+                <div class="task_completed2" style="display: flex;height: 148px;justify-content: center;">
+                    <canvas id="tasksInProgressChart" style="    width: 110px;height: 110px;"></canvas>
+                </div>
+                <div id="tasksInProgressCount">
+                    <p>Loading tasks in progress count...</p>
+                </div>
             </div>
         </div>
         <div class="friends_list col-3" style="padding-right:0;max-height:544px;">
-            <h3>Friends List</h3>
+            <h3>TaskBuddy</h3>
             <div class="d-flex justify-content-between dashboard_footer_container1 align-items-center">
-                <div class="dashboard_footer_img">
-                    @if (UserManager.GetUserAsync(User).Result.Profil is not null)
-                    {
-                        <img class="rounded-circle" alt="Profil" width="40" height="40" src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.Profil))" />
-
-                    }
-                    else
-                    {
-                        <img id="Profil" class="rounded-circle" alt="Profil" width="40" height="40" src="~/uploads/avatar-male.jpg" />
-                    }
+                <div style="color: #626262;
+                    text-align: center;
+                    font-family: Poppins;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 28px; ">
+                    Start organizing and sharing tasks with your friends now.
                 </div>
-                <p style="margin:0;">
-                    friend one
-                </p>
-                <a style="text-decoration:none;margin-top:8px;">
-                    <i class="fa-solid fa-message"></i>
-                </a>
             </div>
-            <div class="btn " style="border-radius: 30px;background: #3A3882;color: #FFF;font-family: Poppins;font-size: 16px;font-style: normal;font-weight: 600;line-height: normal;padding:8px 38px;margin-bottom:15px;">
-                See all
-            </div>
+            <a asp-area="" asp-controller="Utilisateur" asp-action="search" class="btn " style="border-radius: 30px;background: #3A3882;color: #FFF;font-family: Poppins;font-size: 16px;font-style: normal;font-weight: 600;line-height: normal;padding:8px 38px;margin-bottom:15px;">
+                Add Friends
+            </a>
+        </div>
+
+        
+        
+        
+    </div>
+
+    
+
+
+    <div class="score-line">
+        <div class="score-label" style="color: #494949;
+            text-align: center;
+            font-family: Poppins;
+            font-size: 27px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 28px;">
+            @score% Completed (Level: 1)
+        </div>
+        <div style="height: 20px;
+            background: #7d4ffe2e;
+            border-radius: 5px;">
+            <div class="score-progress" style="width: @widthValue;"></div>
         </div>
     </div>
+    
 </section>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+
+
+    $(document).ready(function () {
+        // AJAX call to fetch tasks done count
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("TasksDoneCount", "Home")",
+            success: function (data) {
+                $("#tasksDoneCount").html("<p class=\" dataCount1 \">" + data + "</p>");
+            },
+            error: function () {
+                $("#tasksDoneCount").html("<p>Failed to fetch tasks done count.</p>");
+            }
+        });
+
+        // AJAX call to fetch tasks in progress count
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("TasksInProgressCount", "Home")",
+            success: function (data) {
+                $("#tasksInProgressCount").html("<p class=\" dataCount2 \">" + data + "</p>");
+            },
+            error: function () {
+                $("#tasksInProgressCount").html("<p>Failed to fetch tasks in progress count.</p>");
+            }
+        });
+    });
+
+    //charts start
+    // AJAX call to fetch total tasks count
+    $.ajax({
+        type: "GET",
+        url: "@Url.Action("TotalTasksCount", "Home")",
+        success: function (totalTasksCount) {
+            updateCharts(totalTasksCount);
+        },
+        error: function () {
+            // Handle error fetching total tasks count
+        }
+    });
+
+    function updateCharts(totalTasksCount) {
+        var tasksDoneCount, tasksInProgressCount;
+
+        // Fetch tasks done count
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("TasksDoneCount", "Home")",
+            success: function (tasksDone) {
+                tasksDoneCount = parseInt(tasksDone);
+                updateChart("tasksDoneChart", tasksDoneCount, "Tasks Done", "rgba(252, 164, 101, 0.88)", totalTasksCount);
+            },
+            error: function () {
+                // Handle error fetching tasks done count
+            }
+        });
+
+        // Fetch tasks in progress count
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("TasksInProgressCount", "Home")",
+            success: function (tasksInProgress) {
+                tasksInProgressCount = parseInt(tasksInProgress);
+                updateChart("tasksInProgressChart", tasksInProgressCount, "Tasks In Progress", "#3A3882", totalTasksCount);
+            },
+            error: function () {
+                // Handle error fetching tasks in progress count
+            }
+        });
+    }
+
+    function updateChart(chartId, count, label, color, totalTasksCount) {
+        var percentage = (count / totalTasksCount) * 100;
+        var ctx = document.getElementById(chartId).getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [label],
+                datasets: [{
+                    data: [percentage, 100 - percentage],
+                    backgroundColor: [
+                        color,
+                        '#fff' // White color for the empty space in the chart
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                cutout: '80%', // Change the cutout for the doughnut shape
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        enabled: false
+                    }
+                },
+                // Display percentage in the center of the doughnut chart
+                elements: {
+                    center: {
+                        text: percentage.toFixed(2) + '%',
+                        color: 'blue', // Change the color of the percentage
+                        fontStyle: 'Arial', // Change font style if needed
+                        sidePadding: 20 // Adjust padding if needed
+                    }
+                },
+                // Title configuration
+                plugins: {
+                    title: {
+                        display: false,
+                        text: label, // Title text
+                        color: '#000', // Title color
+                        font: {
+                            size: 14, // Title font size
+                            weight: 'bold' // Title font weight
+                        },
+                        padding: {
+                            top: 10 // Adjust top padding for title
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+
+
+
+</script>
 
 
